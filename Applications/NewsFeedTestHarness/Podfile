@@ -1,0 +1,17 @@
+platform :ios, '8.0'
+use_frameworks!
+
+
+xcodeproj "NewsFeedTestHarness"
+
+def import_shared_pods
+    pod 'ContentFeed', :path => '../../Frameworks/ContentFeed/'
+end
+
+import_shared_pods
+
+target "NewsFeedTestHarness" do
+
+    import_shared_pods
+
+end
