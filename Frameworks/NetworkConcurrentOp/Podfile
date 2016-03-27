@@ -1,0 +1,22 @@
+platform :ios, '8.0'
+use_frameworks!
+
+
+xcodeproj 'NetworkConcurrentOp'
+
+def import_shared_pods
+    pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
+end
+
+import_shared_pods
+
+target 'NetworkConcurrentOp' do
+
+    import_shared_pods
+
+end
+
+
+target 'NetworkConcurrentOpTests' do
+    import_shared_pods
+end
