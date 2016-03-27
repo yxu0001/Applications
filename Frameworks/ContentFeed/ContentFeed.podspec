@@ -11,17 +11,13 @@ s.requires_arc = true
 s.version = "0.0.1"
 
 # 3
-s.license = "Copyright © 2016 athenahealth. All rights reserved."
+s.license = "Copyright © 2016. All rights reserved."
 
 # 4 - Replace with your name and e-mail address
-s.author = { "Bridges-Dev" => "Bridges-Dev@athenahealth.com" }
+s.author = { "Yijia Xu" => "yxu0001@yahoo.com" }
 
 # 5 - Replace this URL with your own Github page's URL (from the address bar)
 s.homepage = "[ContentFeed github Homepage URL Goes Here]"
-
-# For example,
-# s.homepage = "http://www.athenahealth.com"
-
 
 # 6 - Replace this URL with your own Git URL from "Quick Setup"
 # We will have an error emitted because Pods couldn't find the the git url
