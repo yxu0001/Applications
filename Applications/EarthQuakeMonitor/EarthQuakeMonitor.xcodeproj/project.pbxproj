@@ -1,0 +1,633 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1230A180D422E7D6A5941574 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A293262793B2F0EE7A3F00 /* Pods.framework */; };
+		680F41CB5B43413121CAAAE6 /* Pods_EarthQuakeMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604BC9C503A1116A56C9AA01 /* Pods_EarthQuakeMonitor.framework */; };
+		AA5FD38E1CA092E100C9DD64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD38D1CA092E100C9DD64 /* AppDelegate.swift */; };
+		AA5FD3951CA092E100C9DD64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5FD3931CA092E100C9DD64 /* Main.storyboard */; };
+		AA5FD3971CA092E100C9DD64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5FD3961CA092E100C9DD64 /* Assets.xcassets */; };
+		AA5FD39A1CA092E100C9DD64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5FD3981CA092E100C9DD64 /* LaunchScreen.storyboard */; };
+		AA5FD3A51CA092E100C9DD64 /* EarthQuakeMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD3A41CA092E100C9DD64 /* EarthQuakeMonitorTests.swift */; };
+		AA5FD3B01CA092E100C9DD64 /* EarthQuakeMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD3AF1CA092E100C9DD64 /* EarthQuakeMonitorUITests.swift */; };
+		AA5FD3BE1CA0953000C9DD64 /* EarthQuakeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD3BD1CA0952F00C9DD64 /* EarthQuakeListViewController.swift */; };
+		AA5FD3C01CA0A22B00C9DD64 /* QuakeFeedOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD3BF1CA0A22B00C9DD64 /* QuakeFeedOp.swift */; };
+		AA5FD3C61CA0B10D00C9DD64 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD3C51CA0B10D00C9DD64 /* RequestManager.swift */; };
+		AA5FD40D1CA3146D00C9DD64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5FD40C1CA3146D00C9DD64 /* MapKit.framework */; };
+		AA5FD40F1CA315E600C9DD64 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD40E1CA315E600C9DD64 /* MapViewController.swift */; };
+		AA5FD4551CA49AED00C9DD64 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD4541CA49AED00C9DD64 /* SplitViewController.swift */; };
+		AA5FD4571CA5A70600C9DD64 /* TodayInEQHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD4561CA5A70600C9DD64 /* TodayInEQHistoryViewController.swift */; };
+		AA5FD45D1CA5DCC800C9DD64 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD45B1CA5DCC800C9DD64 /* WebViewController.swift */; };
+		AA5FD4621CA5FD8800C9DD64 /* WebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA5FD4611CA5FD8800C9DD64 /* WebView.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AA5FD3A11CA092E100C9DD64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA5FD3821CA092E100C9DD64 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA5FD3891CA092E100C9DD64;
+			remoteInfo = EarthQuakeMonitor;
+		};
+		AA5FD3AC1CA092E100C9DD64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA5FD3821CA092E100C9DD64 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA5FD3891CA092E100C9DD64;
+			remoteInfo = EarthQuakeMonitor;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		604BC9C503A1116A56C9AA01 /* Pods_EarthQuakeMonitor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EarthQuakeMonitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73A4EEF8BBD8B04C7D51604E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		80FDE624924211C7E02059E9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		AA5FD38A1CA092E100C9DD64 /* EarthQuakeMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthQuakeMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA5FD38D1CA092E100C9DD64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA5FD3941CA092E100C9DD64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AA5FD3961CA092E100C9DD64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA5FD3991CA092E100C9DD64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AA5FD39B1CA092E100C9DD64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA5FD3A01CA092E100C9DD64 /* EarthQuakeMonitorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EarthQuakeMonitorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA5FD3A41CA092E100C9DD64 /* EarthQuakeMonitorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthQuakeMonitorTests.swift; sourceTree = "<group>"; };
+		AA5FD3A61CA092E100C9DD64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA5FD3AB1CA092E100C9DD64 /* EarthQuakeMonitorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EarthQuakeMonitorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA5FD3AF1CA092E100C9DD64 /* EarthQuakeMonitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthQuakeMonitorUITests.swift; sourceTree = "<group>"; };
+		AA5FD3B11CA092E100C9DD64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA5FD3BD1CA0952F00C9DD64 /* EarthQuakeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarthQuakeListViewController.swift; sourceTree = "<group>"; };
+		AA5FD3BF1CA0A22B00C9DD64 /* QuakeFeedOp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuakeFeedOp.swift; sourceTree = "<group>"; };
+		AA5FD3C51CA0B10D00C9DD64 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
+		AA5FD40C1CA3146D00C9DD64 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		AA5FD40E1CA315E600C9DD64 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		AA5FD4541CA49AED00C9DD64 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		AA5FD4561CA5A70600C9DD64 /* TodayInEQHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayInEQHistoryViewController.swift; sourceTree = "<group>"; };
+		AA5FD45B1CA5DCC800C9DD64 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		AA5FD4611CA5FD8800C9DD64 /* WebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebView.xib; sourceTree = "<group>"; };
+		F4A293262793B2F0EE7A3F00 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA5FD3871CA092E100C9DD64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA5FD40D1CA3146D00C9DD64 /* MapKit.framework in Frameworks */,
+				1230A180D422E7D6A5941574 /* Pods.framework in Frameworks */,
+				680F41CB5B43413121CAAAE6 /* Pods_EarthQuakeMonitor.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA5FD39D1CA092E100C9DD64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA5FD3A81CA092E100C9DD64 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		31FBF04D8E1589488CD77D00 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA5FD40C1CA3146D00C9DD64 /* MapKit.framework */,
+				F4A293262793B2F0EE7A3F00 /* Pods.framework */,
+				604BC9C503A1116A56C9AA01 /* Pods_EarthQuakeMonitor.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AA5FD3811CA092E100C9DD64 = {
+			isa = PBXGroup;
+			children = (
+				AA5FD38C1CA092E100C9DD64 /* EarthQuakeMonitor */,
+				AA5FD3A31CA092E100C9DD64 /* EarthQuakeMonitorTests */,
+				AA5FD3AE1CA092E100C9DD64 /* EarthQuakeMonitorUITests */,
+				AA5FD38B1CA092E100C9DD64 /* Products */,
+				E6EF11A618E070CF58CE8B71 /* Pods */,
+				31FBF04D8E1589488CD77D00 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		AA5FD38B1CA092E100C9DD64 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA5FD38A1CA092E100C9DD64 /* EarthQuakeMonitor.app */,
+				AA5FD3A01CA092E100C9DD64 /* EarthQuakeMonitorTests.xctest */,
+				AA5FD3AB1CA092E100C9DD64 /* EarthQuakeMonitorUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA5FD38C1CA092E100C9DD64 /* EarthQuakeMonitor */ = {
+			isa = PBXGroup;
+			children = (
+				AA5FD45A1CA5D6E700C9DD64 /* reusable */,
+				AA5FD38D1CA092E100C9DD64 /* AppDelegate.swift */,
+				AA5FD3931CA092E100C9DD64 /* Main.storyboard */,
+				AA5FD3961CA092E100C9DD64 /* Assets.xcassets */,
+				AA5FD3981CA092E100C9DD64 /* LaunchScreen.storyboard */,
+				AA5FD39B1CA092E100C9DD64 /* Info.plist */,
+				AA5FD3BD1CA0952F00C9DD64 /* EarthQuakeListViewController.swift */,
+				AA5FD3BF1CA0A22B00C9DD64 /* QuakeFeedOp.swift */,
+				AA5FD3C51CA0B10D00C9DD64 /* RequestManager.swift */,
+				AA5FD40E1CA315E600C9DD64 /* MapViewController.swift */,
+				AA5FD4541CA49AED00C9DD64 /* SplitViewController.swift */,
+				AA5FD4561CA5A70600C9DD64 /* TodayInEQHistoryViewController.swift */,
+			);
+			path = EarthQuakeMonitor;
+			sourceTree = "<group>";
+		};
+		AA5FD3A31CA092E100C9DD64 /* EarthQuakeMonitorTests */ = {
+			isa = PBXGroup;
+			children = (
+				AA5FD3A41CA092E100C9DD64 /* EarthQuakeMonitorTests.swift */,
+				AA5FD3A61CA092E100C9DD64 /* Info.plist */,
+			);
+			path = EarthQuakeMonitorTests;
+			sourceTree = "<group>";
+		};
+		AA5FD3AE1CA092E100C9DD64 /* EarthQuakeMonitorUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AA5FD3AF1CA092E100C9DD64 /* EarthQuakeMonitorUITests.swift */,
+				AA5FD3B11CA092E100C9DD64 /* Info.plist */,
+			);
+			path = EarthQuakeMonitorUITests;
+			sourceTree = "<group>";
+		};
+		AA5FD45A1CA5D6E700C9DD64 /* reusable */ = {
+			isa = PBXGroup;
+			children = (
+				AA5FD45B1CA5DCC800C9DD64 /* WebViewController.swift */,
+				AA5FD4611CA5FD8800C9DD64 /* WebView.xib */,
+			);
+			name = reusable;
+			sourceTree = "<group>";
+		};
+		E6EF11A618E070CF58CE8B71 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				80FDE624924211C7E02059E9 /* Pods.debug.xcconfig */,
+				73A4EEF8BBD8B04C7D51604E /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA5FD3891CA092E100C9DD64 /* EarthQuakeMonitor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA5FD3B41CA092E100C9DD64 /* Build configuration list for PBXNativeTarget "EarthQuakeMonitor" */;
+			buildPhases = (
+				0A42722DA3753B71A1ECE480 /* Check Pods Manifest.lock */,
+				AA5FD3861CA092E100C9DD64 /* Sources */,
+				AA5FD3871CA092E100C9DD64 /* Frameworks */,
+				AA5FD3881CA092E100C9DD64 /* Resources */,
+				AEF40EC99C69F4886A301352 /* Embed Pods Frameworks */,
+				EF343750EF2CCFEBC4B69DA4 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EarthQuakeMonitor;
+			productName = EarthQuakeMonitor;
+			productReference = AA5FD38A1CA092E100C9DD64 /* EarthQuakeMonitor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA5FD39F1CA092E100C9DD64 /* EarthQuakeMonitorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA5FD3B71CA092E100C9DD64 /* Build configuration list for PBXNativeTarget "EarthQuakeMonitorTests" */;
+			buildPhases = (
+				AA5FD39C1CA092E100C9DD64 /* Sources */,
+				AA5FD39D1CA092E100C9DD64 /* Frameworks */,
+				AA5FD39E1CA092E100C9DD64 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA5FD3A21CA092E100C9DD64 /* PBXTargetDependency */,
+			);
+			name = EarthQuakeMonitorTests;
+			productName = EarthQuakeMonitorTests;
+			productReference = AA5FD3A01CA092E100C9DD64 /* EarthQuakeMonitorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AA5FD3AA1CA092E100C9DD64 /* EarthQuakeMonitorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA5FD3BA1CA092E100C9DD64 /* Build configuration list for PBXNativeTarget "EarthQuakeMonitorUITests" */;
+			buildPhases = (
+				AA5FD3A71CA092E100C9DD64 /* Sources */,
+				AA5FD3A81CA092E100C9DD64 /* Frameworks */,
+				AA5FD3A91CA092E100C9DD64 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA5FD3AD1CA092E100C9DD64 /* PBXTargetDependency */,
+			);
+			name = EarthQuakeMonitorUITests;
+			productName = EarthQuakeMonitorUITests;
+			productReference = AA5FD3AB1CA092E100C9DD64 /* EarthQuakeMonitorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA5FD3821CA092E100C9DD64 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0720;
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = athenahealth;
+				TargetAttributes = {
+					AA5FD3891CA092E100C9DD64 = {
+						CreatedOnToolsVersion = 7.2.1;
+					};
+					AA5FD39F1CA092E100C9DD64 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = AA5FD3891CA092E100C9DD64;
+					};
+					AA5FD3AA1CA092E100C9DD64 = {
+						CreatedOnToolsVersion = 7.2.1;
+						TestTargetID = AA5FD3891CA092E100C9DD64;
+					};
+				};
+			};
+			buildConfigurationList = AA5FD3851CA092E100C9DD64 /* Build configuration list for PBXProject "EarthQuakeMonitor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA5FD3811CA092E100C9DD64;
+			productRefGroup = AA5FD38B1CA092E100C9DD64 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA5FD3891CA092E100C9DD64 /* EarthQuakeMonitor */,
+				AA5FD39F1CA092E100C9DD64 /* EarthQuakeMonitorTests */,
+				AA5FD3AA1CA092E100C9DD64 /* EarthQuakeMonitorUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA5FD3881CA092E100C9DD64 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA5FD39A1CA092E100C9DD64 /* LaunchScreen.storyboard in Resources */,
+				AA5FD4621CA5FD8800C9DD64 /* WebView.xib in Resources */,
+				AA5FD3971CA092E100C9DD64 /* Assets.xcassets in Resources */,
+				AA5FD3951CA092E100C9DD64 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA5FD39E1CA092E100C9DD64 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA5FD3A91CA092E100C9DD64 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0A42722DA3753B71A1ECE480 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AEF40EC99C69F4886A301352 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EarthQuakeMonitor/Pods-EarthQuakeMonitor-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF343750EF2CCFEBC4B69DA4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EarthQuakeMonitor/Pods-EarthQuakeMonitor-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA5FD3861CA092E100C9DD64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA5FD3C61CA0B10D00C9DD64 /* RequestManager.swift in Sources */,
+				AA5FD4551CA49AED00C9DD64 /* SplitViewController.swift in Sources */,
+				AA5FD40F1CA315E600C9DD64 /* MapViewController.swift in Sources */,
+				AA5FD45D1CA5DCC800C9DD64 /* WebViewController.swift in Sources */,
+				AA5FD38E1CA092E100C9DD64 /* AppDelegate.swift in Sources */,
+				AA5FD3C01CA0A22B00C9DD64 /* QuakeFeedOp.swift in Sources */,
+				AA5FD4571CA5A70600C9DD64 /* TodayInEQHistoryViewController.swift in Sources */,
+				AA5FD3BE1CA0953000C9DD64 /* EarthQuakeListViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA5FD39C1CA092E100C9DD64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA5FD3A51CA092E100C9DD64 /* EarthQuakeMonitorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA5FD3A71CA092E100C9DD64 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA5FD3B01CA092E100C9DD64 /* EarthQuakeMonitorUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA5FD3A21CA092E100C9DD64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA5FD3891CA092E100C9DD64 /* EarthQuakeMonitor */;
+			targetProxy = AA5FD3A11CA092E100C9DD64 /* PBXContainerItemProxy */;
+		};
+		AA5FD3AD1CA092E100C9DD64 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA5FD3891CA092E100C9DD64 /* EarthQuakeMonitor */;
+			targetProxy = AA5FD3AC1CA092E100C9DD64 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AA5FD3931CA092E100C9DD64 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA5FD3941CA092E100C9DD64 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		AA5FD3981CA092E100C9DD64 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA5FD3991CA092E100C9DD64 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AA5FD3B21CA092E100C9DD64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA5FD3B31CA092E100C9DD64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA5FD3B51CA092E100C9DD64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 80FDE624924211C7E02059E9 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = EarthQuakeMonitor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.EarthQuakeMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA5FD3B61CA092E100C9DD64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73A4EEF8BBD8B04C7D51604E /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = EarthQuakeMonitor/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.EarthQuakeMonitor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		AA5FD3B81CA092E100C9DD64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = EarthQuakeMonitorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.EarthQuakeMonitorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EarthQuakeMonitor.app/EarthQuakeMonitor";
+			};
+			name = Debug;
+		};
+		AA5FD3B91CA092E100C9DD64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = EarthQuakeMonitorTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.EarthQuakeMonitorTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EarthQuakeMonitor.app/EarthQuakeMonitor";
+			};
+			name = Release;
+		};
+		AA5FD3BB1CA092E100C9DD64 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = EarthQuakeMonitorUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.EarthQuakeMonitorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = EarthQuakeMonitor;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		AA5FD3BC1CA092E100C9DD64 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = EarthQuakeMonitorUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.EarthQuakeMonitorUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = EarthQuakeMonitor;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA5FD3851CA092E100C9DD64 /* Build configuration list for PBXProject "EarthQuakeMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA5FD3B21CA092E100C9DD64 /* Debug */,
+				AA5FD3B31CA092E100C9DD64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA5FD3B41CA092E100C9DD64 /* Build configuration list for PBXNativeTarget "EarthQuakeMonitor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA5FD3B51CA092E100C9DD64 /* Debug */,
+				AA5FD3B61CA092E100C9DD64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA5FD3B71CA092E100C9DD64 /* Build configuration list for PBXNativeTarget "EarthQuakeMonitorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA5FD3B81CA092E100C9DD64 /* Debug */,
+				AA5FD3B91CA092E100C9DD64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA5FD3BA1CA092E100C9DD64 /* Build configuration list for PBXNativeTarget "EarthQuakeMonitorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA5FD3BB1CA092E100C9DD64 /* Debug */,
+				AA5FD3BC1CA092E100C9DD64 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA5FD3821CA092E100C9DD64 /* Project object */;
+}

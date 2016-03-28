@@ -1,0 +1,17 @@
+platform :ios, '8.0'
+use_frameworks!
+
+
+xcodeproj "EarthQuakeMonitor"
+
+def import_shared_pods
+    pod 'NetworkConcurrentOp', :path => '../../Frameworks/NetworkConcurrentOp/'
+end
+
+import_shared_pods
+
+target "EarthQuakeMonitor" do
+
+    import_shared_pods
+
+end
