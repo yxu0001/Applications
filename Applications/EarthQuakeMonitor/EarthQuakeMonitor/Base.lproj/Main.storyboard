@@ -44,9 +44,30 @@
                             <outlet property="delegate" destination="6b1-de-bhn" id="csU-Ls-8GF"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="EIO-ot-GWh"/>
+                    <navigationItem key="navigationItem" id="EIO-ot-GWh">
+                        <nil key="title"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="BP8-Vf-xai" id="109-BJ-xm4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="olr-ie-tyr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="RWp-18-NbY">
+                    <connections>
+                        <outlet property="delegate" destination="6b1-de-bhn" id="dMZ-Oe-8YZ"/>
+                        <outlet property="searchContentsController" destination="6b1-de-bhn" id="1sw-AX-yZd"/>
+                        <outlet property="searchResultsDataSource" destination="6b1-de-bhn" id="opL-HS-ry3"/>
+                        <outlet property="searchResultsDelegate" destination="6b1-de-bhn" id="TKw-Fu-Kuf"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="BP8-Vf-xai">
+                    <connections>
+                        <outlet property="delegate" destination="6b1-de-bhn" id="gCo-VZ-zCb"/>
+                        <outlet property="searchContentsController" destination="6b1-de-bhn" id="Q4T-6r-j8K"/>
+                        <outlet property="searchResultsDataSource" destination="6b1-de-bhn" id="06i-xa-RMs"/>
+                        <outlet property="searchResultsDelegate" destination="6b1-de-bhn" id="hwe-NX-EvX"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2301" y="-911"/>
         </scene>

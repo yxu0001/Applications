@@ -12,6 +12,10 @@ class EarthQuakeListViewController: UITableViewController {
     lazy var requestMgr = RequestManager()
     var selectedFeature: QuakeFeed.Feature?
     var currentRefreshTimeInterval: FeedSummaryTimeInterval!
+    lazy var searchController = UISearchController(searchResultsController: nil)
+    var filtered: [QuakeFeed.Feature]?
+    
+    @IBOutlet weak var navBarTitleView: UIView!
     
     var feed: QuakeFeed? {
         didSet {
@@ -34,6 +38,13 @@ class EarthQuakeListViewController: UITableViewController {
         self.refreshControl = refreshControl
         
         self.navigationItem.title = "Earthquakes in the Past Month"
+        
+        // Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        searchController.searchBar.sizeToFit()
+        tableView.tableHeaderView = searchController.searchBar
     }
     
     override func didReceiveMemoryWarning() {
@@ -87,23 +98,37 @@ class EarthQuakeListViewController: UITableViewController {
     
     // MARK: - UITableViewDataSource and UITableViewDelegate
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchController.active && !searchController.searchBar.text!.isEmpty {
+            return filtered?.count ?? 0
+        }
+        
         return feed?.features.count ?? 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FeedCell", forIndexPath: indexPath)
-        cell.textLabel?.text = feed?.features[indexPath.row].properties.title
-        let timestamp = feed?.features[indexPath.row].properties.time // milliseconds
-        let datetime = NSDate(timeIntervalSince1970: timestamp! * 0.001)
-        let dateformatter = NSDateFormatter()
-        dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ "
-        dateformatter.timeZone = NSTimeZone(name: "UTC")
-        // set timezone
-        //let tz = feed?.features[indexPath.row].properties.tz // timezone
-        //let timezone = NSTimeZone(forSecondsFromGMT: tz!*60)
-        //dateformatter.timeZone = timezone
-        let datestring = dateformatter.stringFromDate(datetime)
-        cell.detailTextLabel?.text = datestring + dateformatter.timeZone.name
+        let feature: QuakeFeed.Feature?
+        if searchController.active && !searchController.searchBar.text!.isEmpty {
+            feature = filtered?[indexPath.row]
+        } else {
+            feature = feed?.features[indexPath.row]
+        }
+        
+        if let feature = feature {
+            cell.textLabel?.text = feature.properties.title
+            let timestamp = feature.properties.time // milliseconds
+            
+            let datetime = NSDate(timeIntervalSince1970: timestamp! * 0.001)
+            let dateformatter = NSDateFormatter()
+            dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ "
+            dateformatter.timeZone = NSTimeZone(name: "UTC")
+            // set timezone
+            //let tz = feed?.features[indexPath.row].properties.tz // timezone
+            //let timezone = NSTimeZone(forSecondsFromGMT: tz!*60)
+            //dateformatter.timeZone = timezone
+            let datestring = dateformatter.stringFromDate(datetime)
+            cell.detailTextLabel?.text = datestring + dateformatter.timeZone.name
+        }
         return cell
     }
     
@@ -120,4 +145,17 @@ class EarthQuakeListViewController: UITableViewController {
         }
     }
     
+    // MARK: -
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        filtered = feed?.features.filter { feature in
+            return feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
+        }
+    }
+}
+
+extension EarthQuakeListViewController: UISearchResultsUpdating {
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+        tableView.reloadData()
+    }
 }
