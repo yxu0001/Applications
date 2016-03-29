@@ -45,7 +45,9 @@ class EarthQuakeListViewController: UITableViewController {
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         searchController.searchBar.sizeToFit()
-        //tableView.tableHeaderView = searchController.searchBar
+        tableView.tableHeaderView = searchController.searchBar
+        searchController.searchBar.delegate = self
+        searchController.delegate = self
         
         // dynamic cell height
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -117,9 +119,13 @@ class EarthQuakeListViewController: UITableViewController {
         return title
     }
     
+    private func isSearching() -> Bool {
+        return searchController.active && !searchController.searchBar.text!.isEmpty
+    }
+    
     // MARK: - UITableViewDataSource and UITableViewDelegate
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchController.active && !searchController.searchBar.text!.isEmpty {
+        if isSearching() {
             return filtered?.count ?? 0
         }
         
@@ -129,7 +135,7 @@ class EarthQuakeListViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FeedCell", forIndexPath: indexPath) as! FeedCell
         let feature: QuakeFeed.Feature?
-        if searchController.active && !searchController.searchBar.text!.isEmpty {
+        if isSearching() {
             feature = filtered?[indexPath.row]
         } else {
             feature = feed?.features[indexPath.row]
@@ -188,7 +194,13 @@ class EarthQuakeListViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if let selectedFeature = feed?.features[indexPath.row] {
+        let selectedFeature: QuakeFeed.Feature!
+        if isSearching() {
+            selectedFeature = filtered?[indexPath.row]
+        } else {
+            selectedFeature = feed?.features[indexPath.row]
+        }
+        if let selectedFeature = selectedFeature {
                 //performSegueWithIdentifier("MapViewSegue", sender: self)
                 if let mapNavVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("MapNavController") as? UINavigationController,
                     mapVC = mapNavVC.topViewController as? MapViewController
@@ -199,13 +211,6 @@ class EarthQuakeListViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 0 {
-            return searchController.searchBar
-        }
-        return nil
-    }
-    
     // MARK: - UISearchController
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         filtered = feed?.features.filter { feature in
@@ -214,7 +219,34 @@ class EarthQuakeListViewController: UITableViewController {
     }
 }
 
-extension EarthQuakeListViewController: UISearchResultsUpdating {
+extension EarthQuakeListViewController: UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
+    // MARK: - UISearchBarDelegate
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
+    // MARK: - UISearchControllerDelegate
+    func presentSearchController(searchController: UISearchController) {
+        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+    }
+    
+    func willPresentSearchController(searchController: UISearchController) {
+        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+    }
+    
+    func didPresentSearchController(searchController: UISearchController) {
+        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+    }
+    
+    func willDismissSearchController(searchController: UISearchController) {
+        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+    }
+    
+    func didDismissSearchController(searchController: UISearchController) {
+        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+    }
+    
+    // MARK: - UISearchResultsUpdating
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         filterContentForSearchText(searchController.searchBar.text!)
         tableView.reloadData()
