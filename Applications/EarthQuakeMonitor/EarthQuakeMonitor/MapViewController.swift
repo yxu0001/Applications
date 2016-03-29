@@ -54,7 +54,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     private func addAnnotation(center: CLLocation) {
         let annotation = MKPointAnnotation()
-        annotation.title = selectedFeature.properties.title
+        annotation.title = "latitude = \(selectedFeature.geometry.coordinates[1])," +
+                           "longitude = \(selectedFeature.geometry.coordinates[0])," +
+                           "depth = \(selectedFeature.geometry.coordinates[2])"
         annotation.subtitle = "\(selectedFeature.properties.mag)"
         annotation.coordinate = center.coordinate
         mapView.addAnnotation(annotation)

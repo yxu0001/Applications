@@ -8,6 +8,10 @@
 import NetworkConcurrentOp
 import SwiftyJSON
 
+enum AlertLevel: String {
+    case green, yellow, orange, red
+}
+
 struct QuakeFeedKey {
     let type = "type"
     
@@ -111,7 +115,8 @@ struct QuakeFeed {
             var felt: Int?
             var cdi: Double?
             var mmi: Double?
-            var alert: String!
+            //var alert: String!
+            var alert: AlertLevel?
             var status: String!
             var tsunami: Int!
             var sig: Int!
@@ -194,7 +199,10 @@ class QuakeFeedOp: NetworkConcurrentOperation {
             property.felt = propertyJSON[keys.featureKey.propertyKey.felt].int
             property.cdi = propertyJSON[keys.featureKey.propertyKey.cdi].double
             property.mmi = propertyJSON[keys.featureKey.propertyKey.mmi].double
-            property.alert = propertyJSON[keys.featureKey.propertyKey.alert].stringValue
+            if let alert = AlertLevel(rawValue: propertyJSON[keys.featureKey.propertyKey.alert].stringValue) {
+                property.alert = alert
+            }
+            //property.alert = propertyJSON[keys.featureKey.propertyKey.alert].stringValue
             property.status = propertyJSON[keys.featureKey.propertyKey.status].stringValue
             property.tsunami = propertyJSON[keys.featureKey.propertyKey.tsunami].intValue
             property.sig = propertyJSON[keys.featureKey.propertyKey.sig].intValue
