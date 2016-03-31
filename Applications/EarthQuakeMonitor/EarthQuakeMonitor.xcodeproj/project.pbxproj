@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1230A180D422E7D6A5941574 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A293262793B2F0EE7A3F00 /* Pods.framework */; };
 		680F41CB5B43413121CAAAE6 /* Pods_EarthQuakeMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604BC9C503A1116A56C9AA01 /* Pods_EarthQuakeMonitor.framework */; };
+		AA242F191CAC705D00A88E04 /* CustomizedAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA242F181CAC705D00A88E04 /* CustomizedAnnotationView.swift */; };
+		AA242F1B1CAC789900A88E04 /* CustomizedAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA242F1A1CAC789900A88E04 /* CustomizedAnnotation.swift */; };
 		AA5FD38E1CA092E100C9DD64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD38D1CA092E100C9DD64 /* AppDelegate.swift */; };
 		AA5FD3951CA092E100C9DD64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5FD3931CA092E100C9DD64 /* Main.storyboard */; };
 		AA5FD3971CA092E100C9DD64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5FD3961CA092E100C9DD64 /* Assets.xcassets */; };
@@ -47,6 +49,8 @@
 		604BC9C503A1116A56C9AA01 /* Pods_EarthQuakeMonitor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EarthQuakeMonitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73A4EEF8BBD8B04C7D51604E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		80FDE624924211C7E02059E9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		AA242F181CAC705D00A88E04 /* CustomizedAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizedAnnotationView.swift; sourceTree = "<group>"; };
+		AA242F1A1CAC789900A88E04 /* CustomizedAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizedAnnotation.swift; sourceTree = "<group>"; };
 		AA5FD38A1CA092E100C9DD64 /* EarthQuakeMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthQuakeMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA5FD38D1CA092E100C9DD64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA5FD3941CA092E100C9DD64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -146,6 +150,8 @@
 				AA5FD40E1CA315E600C9DD64 /* MapViewController.swift */,
 				AA5FD4541CA49AED00C9DD64 /* SplitViewController.swift */,
 				AA5FD4561CA5A70600C9DD64 /* TodayInEQHistoryViewController.swift */,
+				AA242F181CAC705D00A88E04 /* CustomizedAnnotationView.swift */,
+				AA242F1A1CAC789900A88E04 /* CustomizedAnnotation.swift */,
 			);
 			path = EarthQuakeMonitor;
 			sourceTree = "<group>";
@@ -369,8 +375,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA242F191CAC705D00A88E04 /* CustomizedAnnotationView.swift in Sources */,
 				AA5FD3C61CA0B10D00C9DD64 /* RequestManager.swift in Sources */,
 				AA5FD4551CA49AED00C9DD64 /* SplitViewController.swift in Sources */,
+				AA242F1B1CAC789900A88E04 /* CustomizedAnnotation.swift in Sources */,
 				AA5FD40F1CA315E600C9DD64 /* MapViewController.swift in Sources */,
 				AA5FD45D1CA5DCC800C9DD64 /* WebViewController.swift in Sources */,
 				AA5FD38E1CA092E100C9DD64 /* AppDelegate.swift in Sources */,
@@ -467,7 +475,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -505,7 +513,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

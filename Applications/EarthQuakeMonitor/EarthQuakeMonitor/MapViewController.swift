@@ -53,12 +53,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     private func addAnnotation(center: CLLocation) {
-        let annotation = MKPointAnnotation()
-        annotation.title = "latitude = \(selectedFeature.geometry.coordinates[1])," +
-                           "longitude = \(selectedFeature.geometry.coordinates[0])," +
-                           "depth = \(selectedFeature.geometry.coordinates[2])"
-        annotation.subtitle = "\(selectedFeature.properties.mag)"
-        annotation.coordinate = center.coordinate
+//        let annotation = MKPointAnnotation()
+//        annotation.title = "\(selectedFeature.properties.title)"
+//        annotation.title = "latitude = \(selectedFeature.geometry.coordinates[1])," +
+//                           "longitude = \(selectedFeature.geometry.coordinates[0])," +
+//                           "depth = \(selectedFeature.geometry.coordinates[2])"
+//        annotation.subtitle = "\(selectedFeature.properties.mag)"
+//        annotation.coordinate = center.coordinate
+
+        let annotation = CustomizedAnnotation()
+        annotation.feature = selectedFeature
         mapView.addAnnotation(annotation)
         mapView.selectAnnotation(annotation, animated: true)
     }
@@ -79,15 +83,32 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             return nil
         }
         
-        if (annotation.isKindOfClass(MKPointAnnotation)) {
+        //if (annotation.isKindOfClass(MKPointAnnotation)) {
+        if (annotation.isKindOfClass(CustomizedAnnotation)) {
             mapView.translatesAutoresizingMaskIntoConstraints = false
-            var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("CustomAnnotation") as MKAnnotationView!
+            //var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("CustomAnnotation") as MKAnnotationView!
+            //var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("CustomAnnotation") as? MKPinAnnotationView
+            var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("CustomAnnotation") as?CustomizedAnnotationView
+
             
             if (annotationView == nil) {
-                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "CustomAnnotation")
-                annotationView.canShowCallout = true
+                //annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "CustomAnnotation")
+                //annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "CustomAnnotation")
+                annotationView = CustomizedAnnotationView(annotation: annotation, reuseIdentifier: "CustomAnnotation")
+                
+//                let myView = UIView()
+//                myView.backgroundColor = .greenColor()
+//                
+//                let widthConstraint = NSLayoutConstraint(item: myView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 40)
+//                myView.addConstraint(widthConstraint)
+//                
+//                let heightConstraint = NSLayoutConstraint(item: myView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 20)
+//                myView.addConstraint(heightConstraint)
+//                
+//                annotationView!.detailCalloutAccessoryView = myView
+                annotationView!.canShowCallout = true
             } else {
-                annotationView.annotation = annotation;
+                annotationView!.annotation = annotation
             }
             
             return annotationView
