@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1230A180D422E7D6A5941574 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A293262793B2F0EE7A3F00 /* Pods.framework */; };
 		680F41CB5B43413121CAAAE6 /* Pods_EarthQuakeMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604BC9C503A1116A56C9AA01 /* Pods_EarthQuakeMonitor.framework */; };
 		AA242F191CAC705D00A88E04 /* CustomizedAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA242F181CAC705D00A88E04 /* CustomizedAnnotationView.swift */; };
 		AA242F1B1CAC789900A88E04 /* CustomizedAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA242F1A1CAC789900A88E04 /* CustomizedAnnotation.swift */; };
@@ -17,15 +16,16 @@
 		AA5FD39A1CA092E100C9DD64 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5FD3981CA092E100C9DD64 /* LaunchScreen.storyboard */; };
 		AA5FD3A51CA092E100C9DD64 /* EarthQuakeMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD3A41CA092E100C9DD64 /* EarthQuakeMonitorTests.swift */; };
 		AA5FD3B01CA092E100C9DD64 /* EarthQuakeMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD3AF1CA092E100C9DD64 /* EarthQuakeMonitorUITests.swift */; };
-		AA5FD3BE1CA0953000C9DD64 /* EarthQuakeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD3BD1CA0952F00C9DD64 /* EarthQuakeListViewController.swift */; };
-		AA5FD3C01CA0A22B00C9DD64 /* QuakeFeedOp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD3BF1CA0A22B00C9DD64 /* QuakeFeedOp.swift */; };
-		AA5FD3C61CA0B10D00C9DD64 /* RequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD3C51CA0B10D00C9DD64 /* RequestManager.swift */; };
 		AA5FD40D1CA3146D00C9DD64 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA5FD40C1CA3146D00C9DD64 /* MapKit.framework */; };
 		AA5FD40F1CA315E600C9DD64 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD40E1CA315E600C9DD64 /* MapViewController.swift */; };
 		AA5FD4551CA49AED00C9DD64 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD4541CA49AED00C9DD64 /* SplitViewController.swift */; };
 		AA5FD4571CA5A70600C9DD64 /* TodayInEQHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD4561CA5A70600C9DD64 /* TodayInEQHistoryViewController.swift */; };
 		AA5FD45D1CA5DCC800C9DD64 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD45B1CA5DCC800C9DD64 /* WebViewController.swift */; };
 		AA5FD4621CA5FD8800C9DD64 /* WebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA5FD4611CA5FD8800C9DD64 /* WebView.xib */; };
+		AABA83C71CBC24400063750C /* AFRequestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA83C61CBC24400063750C /* AFRequestManager.swift */; };
+		AABA83C91CBC389B0063750C /* EarthQuakeServiceConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA83C81CBC389B0063750C /* EarthQuakeServiceConfig.swift */; };
+		AABA83CB1CBC4D0A0063750C /* EarthQuakeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD3BD1CA0952F00C9DD64 /* EarthQuakeListViewController.swift */; };
+		AABA83CE1CBC55E40063750C /* QuakeFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA83CD1CBC55E40063750C /* QuakeFeed.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,11 +46,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F0D364795E2410DD12C9A2F /* Pods_EarthQuakeMonitorResearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EarthQuakeMonitorResearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		479D12BA8AB073C078C7150A /* Pods-EarthQuakeMonitor.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EarthQuakeMonitor.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EarthQuakeMonitor/Pods-EarthQuakeMonitor.debug.xcconfig"; sourceTree = "<group>"; };
 		604BC9C503A1116A56C9AA01 /* Pods_EarthQuakeMonitor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EarthQuakeMonitor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		73A4EEF8BBD8B04C7D51604E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		80FDE624924211C7E02059E9 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		898323928EEAE27C8C4D51AA /* Pods-EarthQuakeMonitorResearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EarthQuakeMonitorResearch.release.xcconfig"; path = "Pods/Target Support Files/Pods-EarthQuakeMonitorResearch/Pods-EarthQuakeMonitorResearch.release.xcconfig"; sourceTree = "<group>"; };
+		A0E0DDD669473627D5F0F48D /* Pods-EarthQuakeMonitorResearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EarthQuakeMonitorResearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EarthQuakeMonitorResearch/Pods-EarthQuakeMonitorResearch.debug.xcconfig"; sourceTree = "<group>"; };
 		AA242F181CAC705D00A88E04 /* CustomizedAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizedAnnotationView.swift; sourceTree = "<group>"; };
 		AA242F1A1CAC789900A88E04 /* CustomizedAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizedAnnotation.swift; sourceTree = "<group>"; };
+		AA3C1B9162B972E30C2A2D4F /* Pods-EarthQuakeMonitor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EarthQuakeMonitor.release.xcconfig"; path = "Pods/Target Support Files/Pods-EarthQuakeMonitor/Pods-EarthQuakeMonitor.release.xcconfig"; sourceTree = "<group>"; };
 		AA5FD38A1CA092E100C9DD64 /* EarthQuakeMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthQuakeMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA5FD38D1CA092E100C9DD64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA5FD3941CA092E100C9DD64 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -64,14 +69,16 @@
 		AA5FD3AF1CA092E100C9DD64 /* EarthQuakeMonitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthQuakeMonitorUITests.swift; sourceTree = "<group>"; };
 		AA5FD3B11CA092E100C9DD64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA5FD3BD1CA0952F00C9DD64 /* EarthQuakeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarthQuakeListViewController.swift; sourceTree = "<group>"; };
-		AA5FD3BF1CA0A22B00C9DD64 /* QuakeFeedOp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuakeFeedOp.swift; sourceTree = "<group>"; };
-		AA5FD3C51CA0B10D00C9DD64 /* RequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestManager.swift; sourceTree = "<group>"; };
 		AA5FD40C1CA3146D00C9DD64 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		AA5FD40E1CA315E600C9DD64 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		AA5FD4541CA49AED00C9DD64 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		AA5FD4561CA5A70600C9DD64 /* TodayInEQHistoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayInEQHistoryViewController.swift; sourceTree = "<group>"; };
 		AA5FD45B1CA5DCC800C9DD64 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		AA5FD4611CA5FD8800C9DD64 /* WebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebView.xib; sourceTree = "<group>"; };
+		AABA83341CBC1D620063750C /* EarthQuakeMonitorResearch-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "EarthQuakeMonitorResearch-Info.plist"; path = "/Users/yxu/iOSBootCamp/Applications/EarthQuakeMonitor/EarthQuakeMonitorResearch-Info.plist"; sourceTree = "<absolute>"; };
+		AABA83C61CBC24400063750C /* AFRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AFRequestManager.swift; sourceTree = "<group>"; };
+		AABA83C81CBC389B0063750C /* EarthQuakeServiceConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarthQuakeServiceConfig.swift; sourceTree = "<group>"; };
+		AABA83CD1CBC55E40063750C /* QuakeFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuakeFeed.swift; path = EarthQuakeMonitor/QuakeFeed.swift; sourceTree = "<group>"; };
 		F4A293262793B2F0EE7A3F00 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -81,7 +88,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA5FD40D1CA3146D00C9DD64 /* MapKit.framework in Frameworks */,
-				1230A180D422E7D6A5941574 /* Pods.framework in Frameworks */,
 				680F41CB5B43413121CAAAE6 /* Pods_EarthQuakeMonitor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,6 +115,7 @@
 				AA5FD40C1CA3146D00C9DD64 /* MapKit.framework */,
 				F4A293262793B2F0EE7A3F00 /* Pods.framework */,
 				604BC9C503A1116A56C9AA01 /* Pods_EarthQuakeMonitor.framework */,
+				2F0D364795E2410DD12C9A2F /* Pods_EarthQuakeMonitorResearch.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -116,12 +123,14 @@
 		AA5FD3811CA092E100C9DD64 = {
 			isa = PBXGroup;
 			children = (
+				AABA83CD1CBC55E40063750C /* QuakeFeed.swift */,
 				AA5FD38C1CA092E100C9DD64 /* EarthQuakeMonitor */,
 				AA5FD3A31CA092E100C9DD64 /* EarthQuakeMonitorTests */,
 				AA5FD3AE1CA092E100C9DD64 /* EarthQuakeMonitorUITests */,
 				AA5FD38B1CA092E100C9DD64 /* Products */,
 				E6EF11A618E070CF58CE8B71 /* Pods */,
 				31FBF04D8E1589488CD77D00 /* Frameworks */,
+				AABA83341CBC1D620063750C /* EarthQuakeMonitorResearch-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,8 +154,8 @@
 				AA5FD3981CA092E100C9DD64 /* LaunchScreen.storyboard */,
 				AA5FD39B1CA092E100C9DD64 /* Info.plist */,
 				AA5FD3BD1CA0952F00C9DD64 /* EarthQuakeListViewController.swift */,
-				AA5FD3BF1CA0A22B00C9DD64 /* QuakeFeedOp.swift */,
-				AA5FD3C51CA0B10D00C9DD64 /* RequestManager.swift */,
+				AABA83C81CBC389B0063750C /* EarthQuakeServiceConfig.swift */,
+				AABA83C61CBC24400063750C /* AFRequestManager.swift */,
 				AA5FD40E1CA315E600C9DD64 /* MapViewController.swift */,
 				AA5FD4541CA49AED00C9DD64 /* SplitViewController.swift */,
 				AA5FD4561CA5A70600C9DD64 /* TodayInEQHistoryViewController.swift */,
@@ -188,6 +197,10 @@
 			children = (
 				80FDE624924211C7E02059E9 /* Pods.debug.xcconfig */,
 				73A4EEF8BBD8B04C7D51604E /* Pods.release.xcconfig */,
+				479D12BA8AB073C078C7150A /* Pods-EarthQuakeMonitor.debug.xcconfig */,
+				AA3C1B9162B972E30C2A2D4F /* Pods-EarthQuakeMonitor.release.xcconfig */,
+				A0E0DDD669473627D5F0F48D /* Pods-EarthQuakeMonitorResearch.debug.xcconfig */,
+				898323928EEAE27C8C4D51AA /* Pods-EarthQuakeMonitorResearch.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -375,16 +388,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AABA83C71CBC24400063750C /* AFRequestManager.swift in Sources */,
 				AA242F191CAC705D00A88E04 /* CustomizedAnnotationView.swift in Sources */,
-				AA5FD3C61CA0B10D00C9DD64 /* RequestManager.swift in Sources */,
 				AA5FD4551CA49AED00C9DD64 /* SplitViewController.swift in Sources */,
+				AABA83CE1CBC55E40063750C /* QuakeFeed.swift in Sources */,
 				AA242F1B1CAC789900A88E04 /* CustomizedAnnotation.swift in Sources */,
 				AA5FD40F1CA315E600C9DD64 /* MapViewController.swift in Sources */,
 				AA5FD45D1CA5DCC800C9DD64 /* WebViewController.swift in Sources */,
 				AA5FD38E1CA092E100C9DD64 /* AppDelegate.swift in Sources */,
-				AA5FD3C01CA0A22B00C9DD64 /* QuakeFeedOp.swift in Sources */,
+				AABA83CB1CBC4D0A0063750C /* EarthQuakeListViewController.swift in Sources */,
+				AABA83C91CBC389B0063750C /* EarthQuakeServiceConfig.swift in Sources */,
 				AA5FD4571CA5A70600C9DD64 /* TodayInEQHistoryViewController.swift in Sources */,
-				AA5FD3BE1CA0953000C9DD64 /* EarthQuakeListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +536,7 @@
 		};
 		AA5FD3B51CA092E100C9DD64 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 80FDE624924211C7E02059E9 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 479D12BA8AB073C078C7150A /* Pods-EarthQuakeMonitor.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -536,7 +550,7 @@
 		};
 		AA5FD3B61CA092E100C9DD64 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 73A4EEF8BBD8B04C7D51604E /* Pods.release.xcconfig */;
+			baseConfigurationReference = AA3C1B9162B972E30C2A2D4F /* Pods-EarthQuakeMonitor.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

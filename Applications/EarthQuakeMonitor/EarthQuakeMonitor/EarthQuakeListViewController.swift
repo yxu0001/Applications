@@ -14,7 +14,7 @@ class FeedCell: UITableViewCell {
 
 class EarthQuakeListViewController: UITableViewController {
     
-    lazy var requestMgr = RequestManager()
+    lazy var requestMgr = AFRequestManager()
     var selectedFeature: QuakeFeed.Feature?
     var currentRefreshTimeInterval: FeedSummaryTimeInterval!
     lazy var searchController = UISearchController(searchResultsController: nil)
@@ -37,7 +37,7 @@ class EarthQuakeListViewController: UITableViewController {
         // Pull to refresh
         let refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: "refresh:", forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(EarthQuakeListViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
         
         // Search Controller
@@ -227,23 +227,23 @@ extension EarthQuakeListViewController: UISearchBarDelegate, UISearchControllerD
     
     // MARK: - UISearchControllerDelegate
     func presentSearchController(searchController: UISearchController) {
-        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+        debugPrint("UISearchControllerDelegate invoked method: \(#function).")
     }
     
     func willPresentSearchController(searchController: UISearchController) {
-        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+        debugPrint("UISearchControllerDelegate invoked method: \(#function).")
     }
     
     func didPresentSearchController(searchController: UISearchController) {
-        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+        debugPrint("UISearchControllerDelegate invoked method: \(#function).")
     }
     
     func willDismissSearchController(searchController: UISearchController) {
-        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+        debugPrint("UISearchControllerDelegate invoked method: \(#function).")
     }
     
     func didDismissSearchController(searchController: UISearchController) {
-        debugPrint("UISearchControllerDelegate invoked method: \(__FUNCTION__).")
+        debugPrint("UISearchControllerDelegate invoked method: \(#function).")
     }
     
     // MARK: - UISearchResultsUpdating
