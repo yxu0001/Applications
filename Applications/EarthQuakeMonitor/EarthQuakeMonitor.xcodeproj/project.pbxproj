@@ -78,7 +78,7 @@
 		AABA83341CBC1D620063750C /* EarthQuakeMonitorResearch-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "EarthQuakeMonitorResearch-Info.plist"; path = "/Users/yxu/iOSBootCamp/Applications/EarthQuakeMonitor/EarthQuakeMonitorResearch-Info.plist"; sourceTree = "<absolute>"; };
 		AABA83C61CBC24400063750C /* AFRequestManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AFRequestManager.swift; sourceTree = "<group>"; };
 		AABA83C81CBC389B0063750C /* EarthQuakeServiceConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarthQuakeServiceConfig.swift; sourceTree = "<group>"; };
-		AABA83CD1CBC55E40063750C /* QuakeFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuakeFeed.swift; path = EarthQuakeMonitor/QuakeFeed.swift; sourceTree = "<group>"; };
+		AABA83CD1CBC55E40063750C /* QuakeFeed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuakeFeed.swift; sourceTree = "<group>"; };
 		F4A293262793B2F0EE7A3F00 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -123,7 +123,6 @@
 		AA5FD3811CA092E100C9DD64 = {
 			isa = PBXGroup;
 			children = (
-				AABA83CD1CBC55E40063750C /* QuakeFeed.swift */,
 				AA5FD38C1CA092E100C9DD64 /* EarthQuakeMonitor */,
 				AA5FD3A31CA092E100C9DD64 /* EarthQuakeMonitorTests */,
 				AA5FD3AE1CA092E100C9DD64 /* EarthQuakeMonitorUITests */,
@@ -156,6 +155,7 @@
 				AA5FD3BD1CA0952F00C9DD64 /* EarthQuakeListViewController.swift */,
 				AABA83C81CBC389B0063750C /* EarthQuakeServiceConfig.swift */,
 				AABA83C61CBC24400063750C /* AFRequestManager.swift */,
+				AABA83CD1CBC55E40063750C /* QuakeFeed.swift */,
 				AA5FD40E1CA315E600C9DD64 /* MapViewController.swift */,
 				AA5FD4541CA49AED00C9DD64 /* SplitViewController.swift */,
 				AA5FD4561CA5A70600C9DD64 /* TodayInEQHistoryViewController.swift */,
