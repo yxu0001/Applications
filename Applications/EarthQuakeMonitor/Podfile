@@ -1,17 +1,18 @@
 platform :ios, '8.0'
 use_frameworks!
 
+workspace 'EarthQuakeMonitor'
+xcodeproj 'EarthQuakeMonitor'
 
-xcodeproj "EarthQuakeMonitor"
+# Instead of using Alamofire, used self created network op.
+#target 'EarthQuakeMonitorResearch' do
+#    pod 'NetworkConcurrentOp', :path => '../../Frameworks/NetworkConcurrentOp/'
+#end
 
-def import_shared_pods
-    pod 'NetworkConcurrentOp', :path => '../../Frameworks/NetworkConcurrentOp/'
-end
 
-import_shared_pods
-
-target "EarthQuakeMonitor" do
-
-    import_shared_pods
+target 'EarthQuakeMonitor' do
+    
+    pod 'Alamofire', :git => 'https://github.com/Alamofire/Alamofire.git'
+    pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 
 end

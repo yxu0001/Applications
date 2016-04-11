@@ -14,7 +14,7 @@ class FeedCell: UITableViewCell {
 
 class EarthQuakeListViewController: UITableViewController {
     
-    lazy var requestMgr = RequestManager()
+    lazy var requestMgr = AFRequestManager()
     var selectedFeature: QuakeFeed.Feature?
     var currentRefreshTimeInterval: FeedSummaryTimeInterval!
     lazy var searchController = UISearchController(searchResultsController: nil)
