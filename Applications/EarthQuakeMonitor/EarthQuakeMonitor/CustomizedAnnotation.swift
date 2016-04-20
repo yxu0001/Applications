@@ -19,4 +19,7 @@ class CustomizedAnnotation: NSObject, MKAnnotation {
         return nil
     }
 
+    var textForLabel: String? {
+        return feature.properties.title
+    }
 }

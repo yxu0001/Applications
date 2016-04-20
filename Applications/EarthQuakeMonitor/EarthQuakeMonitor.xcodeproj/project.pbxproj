@@ -10,6 +10,8 @@
 		680F41CB5B43413121CAAAE6 /* Pods_EarthQuakeMonitor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 604BC9C503A1116A56C9AA01 /* Pods_EarthQuakeMonitor.framework */; };
 		AA242F191CAC705D00A88E04 /* CustomizedAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA242F181CAC705D00A88E04 /* CustomizedAnnotationView.swift */; };
 		AA242F1B1CAC789900A88E04 /* CustomizedAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA242F1A1CAC789900A88E04 /* CustomizedAnnotation.swift */; };
+		AA3067D31CC181D900538761 /* MapCalloutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA3067D11CC181D900538761 /* MapCalloutView.xib */; };
+		AA3067D51CC182EF00538761 /* MapCalloutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3067D41CC182EF00538761 /* MapCalloutView.swift */; };
 		AA5FD38E1CA092E100C9DD64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5FD38D1CA092E100C9DD64 /* AppDelegate.swift */; };
 		AA5FD3951CA092E100C9DD64 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA5FD3931CA092E100C9DD64 /* Main.storyboard */; };
 		AA5FD3971CA092E100C9DD64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA5FD3961CA092E100C9DD64 /* Assets.xcassets */; };
@@ -55,6 +57,8 @@
 		A0E0DDD669473627D5F0F48D /* Pods-EarthQuakeMonitorResearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EarthQuakeMonitorResearch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EarthQuakeMonitorResearch/Pods-EarthQuakeMonitorResearch.debug.xcconfig"; sourceTree = "<group>"; };
 		AA242F181CAC705D00A88E04 /* CustomizedAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizedAnnotationView.swift; sourceTree = "<group>"; };
 		AA242F1A1CAC789900A88E04 /* CustomizedAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomizedAnnotation.swift; sourceTree = "<group>"; };
+		AA3067D21CC181D900538761 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MapCalloutView.xib; sourceTree = "<group>"; };
+		AA3067D41CC182EF00538761 /* MapCalloutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCalloutView.swift; sourceTree = "<group>"; };
 		AA3C1B9162B972E30C2A2D4F /* Pods-EarthQuakeMonitor.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EarthQuakeMonitor.release.xcconfig"; path = "Pods/Target Support Files/Pods-EarthQuakeMonitor/Pods-EarthQuakeMonitor.release.xcconfig"; sourceTree = "<group>"; };
 		AA5FD38A1CA092E100C9DD64 /* EarthQuakeMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthQuakeMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA5FD38D1CA092E100C9DD64 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -161,6 +165,8 @@
 				AA5FD4561CA5A70600C9DD64 /* TodayInEQHistoryViewController.swift */,
 				AA242F181CAC705D00A88E04 /* CustomizedAnnotationView.swift */,
 				AA242F1A1CAC789900A88E04 /* CustomizedAnnotation.swift */,
+				AA3067D11CC181D900538761 /* MapCalloutView.xib */,
+				AA3067D41CC182EF00538761 /* MapCalloutView.swift */,
 			);
 			path = EarthQuakeMonitor;
 			sourceTree = "<group>";
@@ -312,6 +318,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA3067D31CC181D900538761 /* MapCalloutView.xib in Resources */,
 				AA5FD39A1CA092E100C9DD64 /* LaunchScreen.storyboard in Resources */,
 				AA5FD4621CA5FD8800C9DD64 /* WebView.xib in Resources */,
 				AA5FD3971CA092E100C9DD64 /* Assets.xcassets in Resources */,
@@ -392,6 +399,7 @@
 				AA242F191CAC705D00A88E04 /* CustomizedAnnotationView.swift in Sources */,
 				AA5FD4551CA49AED00C9DD64 /* SplitViewController.swift in Sources */,
 				AABA83CE1CBC55E40063750C /* QuakeFeed.swift in Sources */,
+				AA3067D51CC182EF00538761 /* MapCalloutView.swift in Sources */,
 				AA242F1B1CAC789900A88E04 /* CustomizedAnnotation.swift in Sources */,
 				AA5FD40F1CA315E600C9DD64 /* MapViewController.swift in Sources */,
 				AA5FD45D1CA5DCC800C9DD64 /* WebViewController.swift in Sources */,
@@ -434,6 +442,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		AA3067D11CC181D900538761 /* MapCalloutView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AA3067D21CC181D900538761 /* Base */,
+			);
+			name = MapCalloutView.xib;
+			sourceTree = "<group>";
+		};
 		AA5FD3931CA092E100C9DD64 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
