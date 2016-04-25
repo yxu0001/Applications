@@ -206,6 +206,7 @@ class EarthQuakeListViewController: UITableViewController {
                     mapVC = mapNavVC.topViewController as? MapViewController
             {
                     mapVC.selectedFeature = selectedFeature
+                    mapVC.feeds = feed?.features
                     splitViewController?.showDetailViewController(mapNavVC, sender: nil)
                 }
         }

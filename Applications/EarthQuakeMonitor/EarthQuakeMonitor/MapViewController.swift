@@ -11,6 +11,7 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     var selectedFeature: QuakeFeed.Feature!
+    var feeds: [QuakeFeed.Feature]?
 
     @IBOutlet weak var mapView: MKMapView!
     
@@ -26,8 +27,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if selectedFeature != nil {
             let quakeLoc = CLLocation(latitude: selectedFeature.geometry.coordinates[1], longitude: selectedFeature.geometry.coordinates[0])
             updateMapView(quakeLoc)
-            addCircle(quakeLoc, radius: 10000.0 as CLLocationDistance)
+//            let radius = exp(selectedFeature.properties.mag)*100
+//            print("radius = \(radius)")
+//            addCircle(quakeLoc, radius: radius as CLLocationDistance)
             addAnnotation(quakeLoc)
+        }
+        
+        if let feeds = feeds where feeds.count > 0 {
+            for feed in feeds {
+                let quakeLoc = CLLocation(latitude: feed.geometry.coordinates[1], longitude: feed.geometry.coordinates[0])
+//                updateMapView(quakeLoc)
+                let radius = exp(feed.properties.mag/10.0)*10000.0
+                print("radius = \(radius)")
+                addCircle(quakeLoc, radius: radius as CLLocationDistance)
+            }
         }
     }
 
@@ -47,8 +60,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     private func addCircle(center: CLLocation, radius: Double) {
-        mapView.removeOverlays(mapView.overlays)
-        let circle = MKCircle(centerCoordinate: center.coordinate, radius: radius)        
+//        mapView.removeOverlays(mapView.overlays)
+        let circle = MKCircle(centerCoordinate: center.coordinate, radius: radius)
         mapView.addOverlay(circle)
     }
     
@@ -123,6 +136,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             circleRender.strokeColor = UIColor.redColor()
             circleRender.fillColor = UIColor.yellowColor()
             circleRender.lineWidth = 1
+            circleRender.alpha = 0.5
             return circleRender
         }
         
