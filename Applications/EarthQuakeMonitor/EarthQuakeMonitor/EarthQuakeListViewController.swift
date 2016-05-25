@@ -32,7 +32,8 @@ class EarthQuakeListViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        currentRefreshTimeInterval = .FourPointFiveDay
+        //currentRefreshTimeInterval = .FourPointFiveDay
+        currentRefreshTimeInterval = .AllDay
         refresh(self)
         // Pull to refresh
         let refreshControl = UIRefreshControl()
@@ -43,7 +44,7 @@ class EarthQuakeListViewController: UITableViewController {
         // Search Controller
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
-        definesPresentationContext = true
+        searchController.definesPresentationContext = true
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
         searchController.searchBar.delegate = self
@@ -89,10 +90,16 @@ class EarthQuakeListViewController: UITableViewController {
             dispatch_async(dispatch_get_main_queue()) {
                 self.refreshControl!.endRefreshing()
                 self.navigationItem.title = self.navbarTitle()
+                /*
                 if self.currentRefreshTimeInterval == .FourPointFiveDay {
                     self.currentRefreshTimeInterval = .FourPointFiveWeek
                 } else if self.currentRefreshTimeInterval == .FourPointFiveWeek {
                     self.currentRefreshTimeInterval = .FourPointFiveMonth
+                }*/
+                if self.currentRefreshTimeInterval == .AllDay {
+                    self.currentRefreshTimeInterval = .AllWeek
+                } else if self.currentRefreshTimeInterval == .AllWeek {
+                    self.currentRefreshTimeInterval = .AllMonth
                 }
             }
             
