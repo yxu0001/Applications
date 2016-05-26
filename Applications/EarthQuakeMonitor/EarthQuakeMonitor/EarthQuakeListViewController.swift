@@ -44,8 +44,10 @@ class EarthQuakeListViewController: UITableViewController {
         // Search Controller
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.definesPresentationContext = true
         searchController.searchBar.sizeToFit()
+        searchController.searchBar.scopeButtonTitles = ["All", "M4.5 up"]
         tableView.tableHeaderView = searchController.searchBar
         searchController.searchBar.delegate = self
         searchController.delegate = self
@@ -127,7 +129,8 @@ class EarthQuakeListViewController: UITableViewController {
     }
     
     private func isSearching() -> Bool {
-        return searchController.active && !searchController.searchBar.text!.isEmpty
+        //return searchController.active && !searchController.searchBar.text!.isEmpty
+        return searchController.active
     }
     
     // MARK: - UITableViewDataSource and UITableViewDelegate
@@ -237,8 +240,22 @@ class EarthQuakeListViewController: UITableViewController {
     // MARK: - UISearchController
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         filtered = feed?.features.filter { feature in
-            return feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
+            if scope == "All" {
+                if searchText.isEmpty {
+                    return true
+                } else {
+                    return feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
+                }
+            } else if scope == "M4.5 up" {
+                if searchText.isEmpty {
+                    return feature.properties.mag >= 4.5
+                } else {
+                    return (feature.properties.mag >= 4.5) && feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
+                }
+            }
+            return false
         }
+        tableView.reloadData()
     }
 }
 
@@ -269,9 +286,29 @@ extension EarthQuakeListViewController: UISearchBarDelegate, UISearchControllerD
         debugPrint("UISearchControllerDelegate invoked method: \(#function).")
     }
     
+    // MARK: - UISearchBar Delegate
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+    }
+    
     // MARK: - UISearchResultsUpdating
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        filterContentForSearchText(searchController.searchBar.text!)
-        tableView.reloadData()
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
     }
 }
+
+// MARK: - Reusable Extensions
+public extension SequenceType {
+    
+    func categorise<U: Hashable>(@noescape keyFunc: Generator.Element -> U) -> [U: [Generator.Element]] {
+        var dict: [U:[Generator.Element]] = [:]
+        for el in self {
+            let key = keyFunc(el)
+            if case nil = dict[key]?.append(el) { dict[key] = [el] }
+        }
+        return dict
+    }
+}
+
