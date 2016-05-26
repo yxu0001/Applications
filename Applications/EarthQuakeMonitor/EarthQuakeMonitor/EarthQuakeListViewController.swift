@@ -169,20 +169,20 @@ class EarthQuakeListViewController: UITableViewController {
             //cell.detailTextLabel?.text = datestring + dateformatter.timeZone.name
             cell.subTitle.text = datestring + dateformatter.timeZone.name
             cell.subTitle.textColor = textColor
-        }
-        
-        // Hightlight search string
-        let baseString = cell.title.text!
-        let attributed = NSMutableAttributedString(string: baseString)
-        
-        let regex = try? NSRegularExpression(pattern: searchController.searchBar.text!, options: .CaseInsensitive)
-        
-        if let matches = (regex?.matchesInString(baseString, options: .ReportProgress, range: NSRange(location: 0, length: baseString.utf16.count)) as [NSTextCheckingResult]?) {
-            for match in matches {
-                attributed.addAttribute(NSBackgroundColorAttributeName, value: UIColor.yellowColor(), range: match.range)
-            }
             
-            cell.title.attributedText = attributed
+            // Hightlight search string
+            let baseString = cell.title.text!
+            let attributed = NSMutableAttributedString(string: baseString)
+            
+            let regex = try? NSRegularExpression(pattern: searchController.searchBar.text!, options: .CaseInsensitive)
+            
+            if let matches = (regex?.matchesInString(baseString, options: .ReportProgress, range: NSRange(location: 0, length: baseString.utf16.count)) as [NSTextCheckingResult]?) {
+                for match in matches {
+                    attributed.addAttribute(NSBackgroundColorAttributeName, value: UIColor.yellowColor(), range: match.range)
+                }
+                
+                cell.title.attributedText = attributed
+            }
         }
         
         cell.layoutIfNeeded()
