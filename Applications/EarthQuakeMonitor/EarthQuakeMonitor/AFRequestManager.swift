@@ -11,6 +11,7 @@ import SwiftyJSON
 class AFRequestManager: NSObject {
     
     lazy var config = Config()
+    let queue = dispatch_queue_create("com.earthquakemonitor.queue", DISPATCH_QUEUE_CONCURRENT)
     
 //    private func composeURL(path: String, resource: String) -> NSURL? {
 //        let urlString = config.scheme + "://" + config.host + "/" + config.endpoint + "/" + path + "/" + resource
@@ -24,7 +25,7 @@ class AFRequestManager: NSObject {
 
     func fetchQuakeSummary(feedSummaryTimeInterval: FeedSummaryTimeInterval, completion: ((success: Bool, feed: QuakeFeed?, error: NSError?) -> Void)?) {
         Alamofire.request(.GET, urlString("summary", resource: feedSummaryTimeInterval.rawValue), parameters: nil, encoding: .URL, headers: nil)
-            .responseJSON {
+            .responseJSON(queue: queue, options: .AllowFragments, completionHandler: {
                 response in
                 guard response.result.isSuccess else {
                     print("Error while fetching tags: \(response.result.error)")
@@ -42,8 +43,7 @@ class AFRequestManager: NSObject {
                 let feed = self.parseSummary(responseJSON)
                 guard let completion = completion else { return }
                 completion(success: true, feed: feed, error: nil)
-
-        }
+        })
     }
 
     private func parseSummary(summaryJSON: [String: AnyObject]) -> QuakeFeed? {
