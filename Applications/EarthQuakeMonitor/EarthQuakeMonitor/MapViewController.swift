@@ -42,6 +42,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 addCircle(quakeLoc, radius: radius as CLLocationDistance)
             }
         }
+        
+        mapView.layoutIfNeeded()
     }
 
     override func didReceiveMemoryWarning() {

@@ -14,51 +14,10 @@ class FeedCell: UITableViewCell {
 
 class EarthQuakeListViewController: UITableViewController {
     
-    lazy var requestMgr = AFRequestManager()
+    lazy var quakeVM = EarthQuakeViewModel()
     var selectedFeature: QuakeFeed.Feature?
     var currentRefreshTimeInterval = FeedSummaryTimeInterval.AllDay
     lazy var searchController = UISearchController(searchResultsController: nil)
-    var filtered: [QuakeFeed.Feature]? {
-        didSet {
-            filteredFeatureByDate = featuresByDate(isSearching())
-        }
-    }
-    
-    var feed: QuakeFeed?
-    var allFeaturesByDate: [NSDate: [QuakeFeed.Feature]]?
-    var filteredFeatureByDate: [NSDate: [QuakeFeed.Feature]]?
-    
-    private func categorizeFeaturesByDate(features: [QuakeFeed.Feature]) -> [NSDate: [QuakeFeed.Feature]]? {
-        return features.categorise {
-            let timestamp = $0.properties.time // milliseconds
-            let datetime = NSDate(timeIntervalSince1970: timestamp! * 0.001)
-            
-            let calendar = NSCalendar.currentCalendar()
-            calendar.timeZone = NSTimeZone(name: "UTC")!
-            let components = calendar.components([.Year, .Month, .Day], fromDate: datetime)
-            let dateOnly = calendar.dateFromComponents(components)
-            
-            return dateOnly!
-        }
-    }
-    
-    private func featuresByDate(searching: Bool) -> [NSDate: [QuakeFeed.Feature]]? {
-        if searching {
-            guard let filtered = filtered else { return nil }
-            return categorizeFeaturesByDate(filtered)
-        } else {
-            guard let features = feed?.features else { return nil }
-            return categorizeFeaturesByDate(features)
-        }
-    }
-    
-    private func getFeaturesByDate(searching: Bool) -> [NSDate: [QuakeFeed.Feature]]? {
-        if isSearching() {
-            return filteredFeatureByDate
-        } else {
-            return allFeaturesByDate
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,7 +69,7 @@ class EarthQuakeListViewController: UITableViewController {
             let destinationVC = (segue.destinationViewController as! UINavigationController).topViewController as! MapViewController
 
             destinationVC.selectedFeature = selectedFeature
-            if let features = feed?.features {
+            if let features = quakeVM.feed?.features {
                 let length = min(10, features.count)
                 destinationVC.feeds = Array(features[0..<length])
             }
@@ -123,12 +82,12 @@ class EarthQuakeListViewController: UITableViewController {
     
     // MARK: - Pull to refresh
     func refresh(sender: AnyObject) {
-        requestMgr.fetchQuakeSummary(currentRefreshTimeInterval, completion: {
-            [unowned self] success, feed, error in
+        quakeVM.fetchQuakeData(currentRefreshTimeInterval, completion: {
+            [unowned self] success, error in
             dispatch_async(dispatch_get_main_queue()) {
                 self.refreshControl!.endRefreshing()
                 self.navigationItem.title = self.navbarTitle()
-
+                
                 if self.currentRefreshTimeInterval == .AllDay {
                     self.currentRefreshTimeInterval = .AllWeek
                 } else if self.currentRefreshTimeInterval == .AllWeek {
@@ -136,16 +95,12 @@ class EarthQuakeListViewController: UITableViewController {
                 }
                 
                 if success {
-                    self.feed = feed
-                    self.allFeaturesByDate = self.featuresByDate(false)
-                    self.filteredFeatureByDate = self.featuresByDate(true)
                     self.tableView.reloadData()
                 } else {
                     print(error?.description)
                 }
             }
-        })
-
+            })
     }
     
     private func navbarTitle() -> String {
@@ -167,26 +122,23 @@ class EarthQuakeListViewController: UITableViewController {
     
     private func isSearching() -> Bool {
         //return searchController.active && !searchController.searchBar.text!.isEmpty
+        quakeVM.isSearching = searchController.active
         return searchController.active
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        guard let featuresByDate = getFeaturesByDate(isSearching()) else { return 0 }
-        return featuresByDate.keys.count
+        return quakeVM.numberOfSections()
     }
     
     // MARK: - UITableViewDataSource and UITableViewDelegate
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let featuresByDate = getFeaturesByDate(isSearching()) else { return 0 }
-        let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
-        guard let numberOfRows = featuresByDate[orderedKeys[section]]?.count else { return 0 }
-        return numberOfRows
+        return quakeVM.numberOfRowsInSetion(section)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FeedCell", forIndexPath: indexPath) as! FeedCell
         
-        guard let featuresByDate = getFeaturesByDate(isSearching()) else { return cell }
+        guard let featuresByDate = quakeVM.getFeaturesByDate() else { return cell }
         let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
         let key = orderedKeys[indexPath.section]
         guard let features = featuresByDate[key] else { return cell }
@@ -232,7 +184,7 @@ class EarthQuakeListViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let featuresByDate = getFeaturesByDate(isSearching()) else { return nil }
+        guard let featuresByDate = quakeVM.getFeaturesByDate() else { return nil }
         let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
         let key = orderedKeys[section]
         let dateFormatter = NSDateFormatter()
@@ -270,7 +222,7 @@ class EarthQuakeListViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        if let featuresByDate = getFeaturesByDate(isSearching()) {
+        if let featuresByDate = quakeVM.getFeaturesByDate() {
             let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
             let key = orderedKeys[indexPath.section]
             if let features = featuresByDate[key] {
@@ -285,17 +237,17 @@ class EarthQuakeListViewController: UITableViewController {
         if isSearching() {
             if searchText.isEmpty {
                 if scope == "All" {
-                    filtered = feed?.features
+                    quakeVM.filtered = quakeVM.feed?.features
                 } else if scope == "M4.5 up" {
-                    filtered = feed?.features.filter{ feature in return feature.properties.mag >= 4.5 }
+                    quakeVM.filtered = quakeVM.feed?.features.filter{ feature in return feature.properties.mag >= 4.5 }
                 }
             } else {
                 if scope == "All" {
-                    filtered = feed?.features.filter { feature in
+                    quakeVM.filtered = quakeVM.feed?.features.filter { feature in
                         return feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
                     }
                 } else if scope == "M4.5 up" {
-                    filtered = feed?.features.filter { feature in
+                    quakeVM.filtered = quakeVM.feed?.features.filter { feature in
                         return (feature.properties.mag >= 4.5) && feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
                     }
                 }
@@ -342,18 +294,6 @@ extension EarthQuakeListViewController: UISearchBarDelegate, UISearchControllerD
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         filterContentForSearchText(searchController.searchBar.text!, scope: scope)
-    }
-}
-
-// MARK: - Reusable Extensions
-public extension SequenceType {
-    func categorise<U: Hashable>(@noescape keyFunc: Generator.Element -> U) -> [U: [Generator.Element]] {
-        var dict: [U:[Generator.Element]] = [:]
-        for el in self {
-            let key = keyFunc(el)
-            if case nil = dict[key]?.append(el) { dict[key] = [el] }
-        }
-        return dict
     }
 }
 

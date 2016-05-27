@@ -94,7 +94,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DEe-l9-F0T">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="infinite" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="DEe-l9-F0T">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <connections>
                                     <outlet property="delegate" destination="gcY-pp-IvL" id="M4r-wG-krb"/>
@@ -103,10 +103,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="DEe-l9-F0T" secondAttribute="trailing" id="CrF-3k-j0H"/>
-                            <constraint firstItem="DEe-l9-F0T" firstAttribute="leading" secondItem="oRo-7A-VzM" secondAttribute="leading" id="G4a-tA-xci"/>
-                            <constraint firstItem="DEe-l9-F0T" firstAttribute="top" secondItem="u2L-Vp-xSG" secondAttribute="bottom" id="QxE-9Z-gc5"/>
-                            <constraint firstItem="NgS-hk-zkJ" firstAttribute="top" secondItem="DEe-l9-F0T" secondAttribute="bottom" id="aDd-Ko-pIE"/>
+                            <constraint firstItem="DEe-l9-F0T" firstAttribute="leading" secondItem="oRo-7A-VzM" secondAttribute="leading" id="8c9-Ao-3DR"/>
+                            <constraint firstItem="NgS-hk-zkJ" firstAttribute="top" secondItem="DEe-l9-F0T" secondAttribute="bottom" id="Bc1-SG-awZ"/>
+                            <constraint firstItem="DEe-l9-F0T" firstAttribute="top" secondItem="u2L-Vp-xSG" secondAttribute="bottom" id="LrO-CH-4kX"/>
+                            <constraint firstAttribute="trailing" secondItem="DEe-l9-F0T" secondAttribute="trailing" id="MdN-hu-EcX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="BpS-Wn-cms"/>
