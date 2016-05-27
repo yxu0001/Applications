@@ -12,12 +12,17 @@ class FeedCell: UITableViewCell {
     @IBOutlet weak var subTitle: UILabel!
 }
 
-class EarthQuakeListViewController: UITableViewController {
+class EarthQuakeListViewController: UIViewController {
     
     lazy var quakeVM = EarthQuakeViewModel()
     var selectedFeature: QuakeFeed.Feature?
     var currentRefreshTimeInterval = FeedSummaryTimeInterval.AllDay
     lazy var searchController = UISearchController(searchResultsController: nil)
+    var refreshControl: UIRefreshControl!
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    @IBOutlet weak var searchBarContainerView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +35,7 @@ class EarthQuakeListViewController: UITableViewController {
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(EarthQuakeListViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.refreshControl = refreshControl
+        tableView.addSubview(refreshControl)
         
         // Search Controller
         searchController.searchResultsUpdater = self
@@ -38,13 +44,33 @@ class EarthQuakeListViewController: UITableViewController {
         definesPresentationContext = true
         searchController.searchBar.sizeToFit()
         searchController.searchBar.scopeButtonTitles = ["All", "M4.5 up"]
-        tableView.tableHeaderView = searchController.searchBar
+                
+        searchBarContainerView.addSubview(searchController.searchBar)
+        searchBarContainerView.layoutIfNeeded()
+
         searchController.searchBar.delegate = self
         searchController.delegate = self
         
         // dynamic cell height
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 60.0
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        updateSearchBarFrame()
+    }
+    
+    // This method is necessary for rotation. Setting constraints does not seem to work.
+    private func updateSearchBarFrame() {
+        var frame = searchController.searchBar.frame
+        frame.size.width = searchBarContainerView.frame.size.width
+        searchController.searchBar.frame = frame
+    }
+    
+    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+        updateSearchBarFrame()
     }
     
     override func didReceiveMemoryWarning() {
@@ -100,7 +126,7 @@ class EarthQuakeListViewController: UITableViewController {
                     print(error?.description)
                 }
             }
-            })
+        })
     }
     
     private func navbarTitle() -> String {
@@ -126,16 +152,148 @@ class EarthQuakeListViewController: UITableViewController {
         return searchController.active
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+//        return quakeVM.numberOfSections()
+//    }
+//    
+//    // MARK: - UITableViewDataSource and UITableViewDelegate
+//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return quakeVM.numberOfRowsInSetion(section)
+//    }
+//    
+//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCellWithIdentifier("FeedCell", forIndexPath: indexPath) as! FeedCell
+//        
+//        guard let featuresByDate = quakeVM.getFeaturesByDate() else { return cell }
+//        let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
+//        let key = orderedKeys[indexPath.section]
+//        guard let features = featuresByDate[key] else { return cell }
+//        let feature = features[indexPath.row]
+//        
+//        let textColor = colorCodedAlertLevel(feature.properties.alert)
+//        
+//        //cell.textLabel?.text = feature.properties.title
+//        cell.title.numberOfLines = 0
+//        cell.title.text = feature.properties.title
+//        cell.title.textColor = textColor
+//        let timestamp = feature.properties.time // milliseconds
+//        
+//        let datetime = NSDate(timeIntervalSince1970: timestamp! * 0.001)
+//        let dateformatter = NSDateFormatter()
+//        dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ "
+//        dateformatter.timeZone = NSTimeZone(name: "UTC")
+//        // set timezone
+//        //let tz = feed?.features[indexPath.row].properties.tz // timezone
+//        //let timezone = NSTimeZone(forSecondsFromGMT: tz!*60)
+//        //dateformatter.timeZone = timezone
+//        let datestring = dateformatter.stringFromDate(datetime)
+//        //cell.detailTextLabel?.text = datestring + dateformatter.timeZone.name
+//        cell.subTitle.text = datestring + dateformatter.timeZone.name
+//        cell.subTitle.textColor = textColor
+//        
+//        // Hightlight search string
+//        let baseString = cell.title.text!
+//        let attributed = NSMutableAttributedString(string: baseString)
+//        
+//        let regex = try? NSRegularExpression(pattern: searchController.searchBar.text!, options: .CaseInsensitive)
+//        
+//        if let matches = (regex?.matchesInString(baseString, options: .ReportProgress, range: NSRange(location: 0, length: baseString.utf16.count)) as [NSTextCheckingResult]?) {
+//            for match in matches {
+//                attributed.addAttribute(NSBackgroundColorAttributeName, value: UIColor.yellowColor(), range: match.range)
+//            }
+//            
+//            cell.title.attributedText = attributed
+//        }
+//        
+//        cell.layoutIfNeeded()
+//        return cell
+//    }
+//    
+//    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        guard let featuresByDate = quakeVM.getFeaturesByDate() else { return nil }
+//        let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
+//        let key = orderedKeys[section]
+//        let dateFormatter = NSDateFormatter()
+//        dateFormatter.dateFormat = "MMM-dd-yyyy"
+//        dateFormatter.timeZone = NSTimeZone(name: "UTC")
+//        
+//        return dateFormatter.stringFromDate(key)
+//    }
+//    
+//    private func colorCodedAlertLevel(alert: AlertLevel?) -> UIColor {
+//        let color: UIColor
+//        let green = UIColor(red: 82.0/255.0, green: 127.0/255.0, blue: 19.0/255.0, alpha: 1.0)
+//        let yellow = UIColor.yellowColor()
+//        let orange = UIColor.orangeColor()
+//        let red = UIColor.redColor()
+//        
+//        if let alert = alert {
+//            switch(alert) {
+//            case .green:
+//                color = green
+//            case .yellow:
+//                color = yellow
+//            case .orange:
+//                color = orange
+//            case .red:
+//                color = red
+//            }
+//        } else {
+//            color = green
+//        }
+//        
+//        return color
+//    }
+//    
+//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+//        
+//        if let featuresByDate = quakeVM.getFeaturesByDate() {
+//            let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
+//            let key = orderedKeys[indexPath.section]
+//            if let features = featuresByDate[key] {
+//                selectedFeature = features[indexPath.row]
+//            }
+//        }
+//        performSegueWithIdentifier("MapViewSegue", sender: self)
+//    }
+    
+    // MARK: - UISearchController
+    func filterContentForSearchText(searchText: String, scope: String = "All") {
+        if isSearching() {
+            if searchText.isEmpty {
+                if scope == "All" {
+                    quakeVM.filtered = quakeVM.feed?.features
+                } else if scope == "M4.5 up" {
+                    quakeVM.filtered = quakeVM.feed?.features.filter{ feature in return feature.properties.mag >= 4.5 }
+                }
+            } else {
+                if scope == "All" {
+                    quakeVM.filtered = quakeVM.feed?.features.filter { feature in
+                        return feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
+                    }
+                } else if scope == "M4.5 up" {
+                    quakeVM.filtered = quakeVM.feed?.features.filter { feature in
+                        return (feature.properties.mag >= 4.5) && feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
+                    }
+                }
+            }
+        }
+        tableView.reloadData()
+    }
+}
+
+extension EarthQuakeListViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return quakeVM.numberOfSections()
     }
     
     // MARK: - UITableViewDataSource and UITableViewDelegate
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return quakeVM.numberOfRowsInSetion(section)
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("FeedCell", forIndexPath: indexPath) as! FeedCell
         
         guard let featuresByDate = quakeVM.getFeaturesByDate() else { return cell }
@@ -183,7 +341,7 @@ class EarthQuakeListViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let featuresByDate = quakeVM.getFeaturesByDate() else { return nil }
         let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
         let key = orderedKeys[section]
@@ -219,7 +377,7 @@ class EarthQuakeListViewController: UITableViewController {
         return color
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         if let featuresByDate = quakeVM.getFeaturesByDate() {
@@ -230,30 +388,6 @@ class EarthQuakeListViewController: UITableViewController {
             }
         }
         performSegueWithIdentifier("MapViewSegue", sender: self)
-    }
-    
-    // MARK: - UISearchController
-    func filterContentForSearchText(searchText: String, scope: String = "All") {
-        if isSearching() {
-            if searchText.isEmpty {
-                if scope == "All" {
-                    quakeVM.filtered = quakeVM.feed?.features
-                } else if scope == "M4.5 up" {
-                    quakeVM.filtered = quakeVM.feed?.features.filter{ feature in return feature.properties.mag >= 4.5 }
-                }
-            } else {
-                if scope == "All" {
-                    quakeVM.filtered = quakeVM.feed?.features.filter { feature in
-                        return feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
-                    }
-                } else if scope == "M4.5 up" {
-                    quakeVM.filtered = quakeVM.feed?.features.filter { feature in
-                        return (feature.properties.mag >= 4.5) && feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
-                    }
-                }
-            }
-        }
-        tableView.reloadData()
     }
 }
 
@@ -282,6 +416,7 @@ extension EarthQuakeListViewController: UISearchBarDelegate, UISearchControllerD
     
     func didDismissSearchController(searchController: UISearchController) {
         debugPrint("UISearchControllerDelegate invoked method: \(#function).")
+        updateSearchBarFrame()
     }
     
     // MARK: - UISearchBar Delegate

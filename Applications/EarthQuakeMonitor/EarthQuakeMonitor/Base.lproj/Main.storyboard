@@ -6,16 +6,109 @@
     </dependencies>
     <scenes>
         <!--Earth Quake List View Controller-->
+        <scene sceneID="E8A-z3-YKM">
+            <objects>
+                <viewController storyboardIdentifier="EarthQuakeListViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="mQR-Et-RAp" customClass="EarthQuakeListViewController" customModule="EarthQuakeMonitor" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zIQ-Ma-uBB"/>
+                        <viewControllerLayoutGuide type="bottom" id="mci-nu-JKd"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bSj-5z-dtv">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="w4L-cg-1Y3">
+                                <rect key="frame" x="0.0" y="108" width="600" height="443"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedCell" rowHeight="75" id="rSk-0l-fP4" customClass="FeedCell" customModule="EarthQuakeMonitor" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="75"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rSk-0l-fP4" id="3YL-c2-rro">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="74.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jUF-Vp-CfT">
+                                                    <rect key="frame" x="8" y="28" width="584" height="39"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Og-sp-jD7">
+                                                    <rect key="frame" x="8" y="8" width="584" height="20"/>
+                                                    <attributedString key="attributedText">
+                                                        <fragment content="Title">
+                                                            <attributes>
+                                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                <font key="NSFont" size="17" name="HelveticaNeue-MediumItalic"/>
+                                                                <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                            </attributes>
+                                                        </fragment>
+                                                    </attributedString>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="jUF-Vp-CfT" firstAttribute="top" secondItem="8Og-sp-jD7" secondAttribute="bottom" id="44D-7v-qG6"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="jUF-Vp-CfT" secondAttribute="trailing" id="4lS-Uf-Djv"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="jUF-Vp-CfT" secondAttribute="bottom" id="Ml5-CA-sIR"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="8Og-sp-jD7" secondAttribute="trailing" id="RSf-nN-YHd"/>
+                                                <constraint firstItem="8Og-sp-jD7" firstAttribute="top" secondItem="3YL-c2-rro" secondAttribute="topMargin" id="Rjg-vW-6Dv"/>
+                                                <constraint firstItem="jUF-Vp-CfT" firstAttribute="leading" secondItem="3YL-c2-rro" secondAttribute="leadingMargin" id="TNS-aJ-qYt"/>
+                                                <constraint firstItem="8Og-sp-jD7" firstAttribute="leading" secondItem="3YL-c2-rro" secondAttribute="leadingMargin" id="da0-ri-p2W"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="subTitle" destination="jUF-Vp-CfT" id="vfY-nj-7ar"/>
+                                            <outlet property="title" destination="8Og-sp-jD7" id="EUo-ox-BZ3"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="mQR-Et-RAp" id="VqZ-cK-miO"/>
+                                    <outlet property="delegate" destination="mQR-Et-RAp" id="Bvw-V1-WcH"/>
+                                </connections>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahj-yv-fck">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="6c4-rx-41Z"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="w4L-cg-1Y3" firstAttribute="leading" secondItem="bSj-5z-dtv" secondAttribute="leading" id="MO7-Gq-LIf"/>
+                            <constraint firstItem="mci-nu-JKd" firstAttribute="top" secondItem="w4L-cg-1Y3" secondAttribute="bottom" id="MiI-Ku-qK5"/>
+                            <constraint firstItem="ahj-yv-fck" firstAttribute="leading" secondItem="bSj-5z-dtv" secondAttribute="leading" id="MiV-cX-bgY"/>
+                            <constraint firstAttribute="trailing" secondItem="ahj-yv-fck" secondAttribute="trailing" id="NRy-MS-KOr"/>
+                            <constraint firstAttribute="trailing" secondItem="w4L-cg-1Y3" secondAttribute="trailing" id="RJF-QP-MJw"/>
+                            <constraint firstItem="ahj-yv-fck" firstAttribute="top" secondItem="zIQ-Ma-uBB" secondAttribute="bottom" id="UlQ-hc-DPc"/>
+                            <constraint firstItem="w4L-cg-1Y3" firstAttribute="top" secondItem="ahj-yv-fck" secondAttribute="bottom" id="rT0-KE-t1A"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="2gM-Dc-40A"/>
+                    <connections>
+                        <outlet property="searchBarContainerView" destination="ahj-yv-fck" id="8Qg-u7-MvN"/>
+                        <outlet property="tableView" destination="w4L-cg-1Y3" id="2lH-M0-lT5"/>
+                        <segue destination="mmd-KA-sVx" kind="showDetail" identifier="MapViewSegue" id="c8K-eS-RP9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pxb-4w-0iG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2301" y="-1595"/>
+        </scene>
+        <!--Earth Quake List View Controller-->
         <scene sceneID="DUB-8A-v2o">
             <objects>
-                <tableViewController storyboardIdentifier="EarthQuakeListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6b1-de-bhn" customClass="EarthQuakeListViewController" customModule="EarthQuakeMonitor" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="6b1-de-bhn" customClass="EarthQuakeListViewController" customModule="EarthQuakeMonitor" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="28" sectionFooterHeight="28" id="ect-Uj-oTo">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedCell" rowHeight="75" id="ucv-v9-wEL" customClass="FeedCell" customModule="EarthQuakeMonitor" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92" width="600" height="75"/>
+                                <rect key="frame" x="0.0" y="28" width="600" height="75"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ucv-v9-wEL" id="Ghd-Ym-NBe">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="74.5"/>
@@ -67,7 +160,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="searchDisplayController" destination="BP8-Vf-xai" id="109-BJ-xm4"/>
-                        <segue destination="mmd-KA-sVx" kind="showDetail" identifier="MapViewSegue" id="E4M-wn-Gii"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="olr-ie-tyr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -165,7 +257,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="6b1-de-bhn" kind="relationship" relationship="rootViewController" id="VKC-yY-83p"/>
+                        <segue destination="mQR-Et-RAp" kind="relationship" relationship="rootViewController" id="GWs-uA-5gM"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XPT-K9-1uk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -229,6 +321,6 @@
         <image name="second" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="E4M-wn-Gii"/>
+        <segue reference="c8K-eS-RP9"/>
     </inferredMetricsTieBreakers>
 </document>
