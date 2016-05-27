@@ -152,112 +152,6 @@ class EarthQuakeListViewController: UIViewController {
         return searchController.active
     }
     
-//    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//        return quakeVM.numberOfSections()
-//    }
-//    
-//    // MARK: - UITableViewDataSource and UITableViewDelegate
-//    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return quakeVM.numberOfRowsInSetion(section)
-//    }
-//    
-//    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCellWithIdentifier("FeedCell", forIndexPath: indexPath) as! FeedCell
-//        
-//        guard let featuresByDate = quakeVM.getFeaturesByDate() else { return cell }
-//        let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
-//        let key = orderedKeys[indexPath.section]
-//        guard let features = featuresByDate[key] else { return cell }
-//        let feature = features[indexPath.row]
-//        
-//        let textColor = colorCodedAlertLevel(feature.properties.alert)
-//        
-//        //cell.textLabel?.text = feature.properties.title
-//        cell.title.numberOfLines = 0
-//        cell.title.text = feature.properties.title
-//        cell.title.textColor = textColor
-//        let timestamp = feature.properties.time // milliseconds
-//        
-//        let datetime = NSDate(timeIntervalSince1970: timestamp! * 0.001)
-//        let dateformatter = NSDateFormatter()
-//        dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ "
-//        dateformatter.timeZone = NSTimeZone(name: "UTC")
-//        // set timezone
-//        //let tz = feed?.features[indexPath.row].properties.tz // timezone
-//        //let timezone = NSTimeZone(forSecondsFromGMT: tz!*60)
-//        //dateformatter.timeZone = timezone
-//        let datestring = dateformatter.stringFromDate(datetime)
-//        //cell.detailTextLabel?.text = datestring + dateformatter.timeZone.name
-//        cell.subTitle.text = datestring + dateformatter.timeZone.name
-//        cell.subTitle.textColor = textColor
-//        
-//        // Hightlight search string
-//        let baseString = cell.title.text!
-//        let attributed = NSMutableAttributedString(string: baseString)
-//        
-//        let regex = try? NSRegularExpression(pattern: searchController.searchBar.text!, options: .CaseInsensitive)
-//        
-//        if let matches = (regex?.matchesInString(baseString, options: .ReportProgress, range: NSRange(location: 0, length: baseString.utf16.count)) as [NSTextCheckingResult]?) {
-//            for match in matches {
-//                attributed.addAttribute(NSBackgroundColorAttributeName, value: UIColor.yellowColor(), range: match.range)
-//            }
-//            
-//            cell.title.attributedText = attributed
-//        }
-//        
-//        cell.layoutIfNeeded()
-//        return cell
-//    }
-//    
-//    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        guard let featuresByDate = quakeVM.getFeaturesByDate() else { return nil }
-//        let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
-//        let key = orderedKeys[section]
-//        let dateFormatter = NSDateFormatter()
-//        dateFormatter.dateFormat = "MMM-dd-yyyy"
-//        dateFormatter.timeZone = NSTimeZone(name: "UTC")
-//        
-//        return dateFormatter.stringFromDate(key)
-//    }
-//    
-//    private func colorCodedAlertLevel(alert: AlertLevel?) -> UIColor {
-//        let color: UIColor
-//        let green = UIColor(red: 82.0/255.0, green: 127.0/255.0, blue: 19.0/255.0, alpha: 1.0)
-//        let yellow = UIColor.yellowColor()
-//        let orange = UIColor.orangeColor()
-//        let red = UIColor.redColor()
-//        
-//        if let alert = alert {
-//            switch(alert) {
-//            case .green:
-//                color = green
-//            case .yellow:
-//                color = yellow
-//            case .orange:
-//                color = orange
-//            case .red:
-//                color = red
-//            }
-//        } else {
-//            color = green
-//        }
-//        
-//        return color
-//    }
-//    
-//    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-//        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-//        
-//        if let featuresByDate = quakeVM.getFeaturesByDate() {
-//            let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
-//            let key = orderedKeys[indexPath.section]
-//            if let features = featuresByDate[key] {
-//                selectedFeature = features[indexPath.row]
-//            }
-//        }
-//        performSegueWithIdentifier("MapViewSegue", sender: self)
-//    }
-    
     // MARK: - UISearchController
     func filterContentForSearchText(searchText: String, scope: String = "All") {
         if isSearching() {
@@ -324,17 +218,19 @@ extension EarthQuakeListViewController: UITableViewDataSource, UITableViewDelega
         cell.subTitle.textColor = textColor
         
         // Hightlight search string
-        let baseString = cell.title.text!
-        let attributed = NSMutableAttributedString(string: baseString)
-        
-        let regex = try? NSRegularExpression(pattern: searchController.searchBar.text!, options: .CaseInsensitive)
-        
-        if let matches = (regex?.matchesInString(baseString, options: .ReportProgress, range: NSRange(location: 0, length: baseString.utf16.count)) as [NSTextCheckingResult]?) {
-            for match in matches {
-                attributed.addAttribute(NSBackgroundColorAttributeName, value: UIColor.yellowColor(), range: match.range)
-            }
+        if !searchController.searchBar.text!.isEmpty {
+            let baseString = cell.title.text!
+            let attributed = NSMutableAttributedString(string: baseString)
             
-            cell.title.attributedText = attributed
+            let regex = try? NSRegularExpression(pattern: searchController.searchBar.text!, options: .CaseInsensitive)
+            
+            if let matches = (regex?.matchesInString(baseString, options: .ReportProgress, range: NSRange(location: 0, length: baseString.utf16.count)) as [NSTextCheckingResult]?) {
+                for match in matches {
+                    attributed.addAttribute(NSBackgroundColorAttributeName, value: UIColor.yellowColor(), range: match.range)
+                }
+                
+                cell.title.attributedText = attributed
+            }
         }
         
         cell.layoutIfNeeded()
