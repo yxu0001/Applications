@@ -46,6 +46,57 @@ class EarthQuakeViewModel: NSObject {
         }
     }
     
+    func filterFeaturesByDate(searchText: String, scope: String) {
+        var dict: [NSDate: [QuakeFeed.Feature]] = [:]
+        
+        guard let keys = allFeaturesByDate?.keys else { return }
+        
+        if scope == "All" {
+            if searchText.isEmpty {
+                filteredFeatureByDate = allFeaturesByDate
+                return
+            } else {
+                for key in keys {
+                    guard let features = allFeaturesByDate?[key] else { continue }
+                    var filtered: [QuakeFeed.Feature]?
+                    filtered = features.filter{ feature in
+                        return feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
+                    }
+                    if let filtered = filtered where filtered.count > 0 {
+                        if dict[key] == nil {
+                            dict[key] = filtered
+                        } else {
+                            dict[key]! += filtered
+                        }
+                    }
+                }
+            }
+        } else if scope == "M4.5 up" {
+            for key in keys {
+                guard let features = allFeaturesByDate?[key] else { continue }
+                var filtered: [QuakeFeed.Feature]?
+                if !searchText.isEmpty {
+                    filtered = features.filter{ feature in
+                        return (feature.properties.mag >= 4.5) && feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
+                    }
+                } else {
+                    filtered = features.filter{ feature in
+                        return (feature.properties.mag >= 4.5)
+                    }
+                }
+                if let filtered = filtered where filtered.count > 0 {
+                    if dict[key] == nil {
+                        dict[key] = filtered
+                    } else {
+                        dict[key]! += filtered
+                    }
+                }
+            }
+        }
+                
+        filteredFeatureByDate = dict
+    }
+    
     func fetchQuakeData(feedSummaryTimeInterval: FeedSummaryTimeInterval, completion: ((success: Bool, error: NSError?) -> Void)) {
         requestMgr.fetchQuakeSummary(feedSummaryTimeInterval, completion: {
             [unowned self] success, feed, error in

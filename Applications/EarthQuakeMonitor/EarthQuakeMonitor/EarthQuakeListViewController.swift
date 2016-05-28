@@ -154,24 +154,27 @@ class EarthQuakeListViewController: UIViewController {
     
     // MARK: - UISearchController
     func filterContentForSearchText(searchText: String, scope: String = "All") {
+//        if isSearching() {
+//            if searchText.isEmpty {
+//                if scope == "All" {
+//                    quakeVM.filtered = quakeVM.feed?.features
+//                } else if scope == "M4.5 up" {
+//                    quakeVM.filtered = quakeVM.feed?.features.filter{ feature in return feature.properties.mag >= 4.5 }
+//                }
+//            } else {
+//                if scope == "All" {
+//                    quakeVM.filtered = quakeVM.feed?.features.filter { feature in
+//                        return feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
+//                    }
+//                } else if scope == "M4.5 up" {
+//                    quakeVM.filtered = quakeVM.feed?.features.filter { feature in
+//                        return (feature.properties.mag >= 4.5) && feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
+//                    }
+//                }
+//            }
+//        }
         if isSearching() {
-            if searchText.isEmpty {
-                if scope == "All" {
-                    quakeVM.filtered = quakeVM.feed?.features
-                } else if scope == "M4.5 up" {
-                    quakeVM.filtered = quakeVM.feed?.features.filter{ feature in return feature.properties.mag >= 4.5 }
-                }
-            } else {
-                if scope == "All" {
-                    quakeVM.filtered = quakeVM.feed?.features.filter { feature in
-                        return feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
-                    }
-                } else if scope == "M4.5 up" {
-                    quakeVM.filtered = quakeVM.feed?.features.filter { feature in
-                        return (feature.properties.mag >= 4.5) && feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
-                    }
-                }
-            }
+            quakeVM.filterFeaturesByDate(searchText, scope: scope)
         }
         tableView.reloadData()
     }
