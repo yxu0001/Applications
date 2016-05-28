@@ -13,11 +13,6 @@ class EarthQuakeViewModel: NSObject {
     var isSearching = false
     
     var feed: QuakeFeed?
-    var filtered: [QuakeFeed.Feature]? {
-        didSet {
-            filteredFeatureByDate = featuresByDate(isSearching)
-        }
-    }
     
     var allFeaturesByDate: [NSDate: [QuakeFeed.Feature]]?
     var filteredFeatureByDate: [NSDate: [QuakeFeed.Feature]]?
@@ -36,14 +31,9 @@ class EarthQuakeViewModel: NSObject {
         }
     }
     
-    private func featuresByDate(searching: Bool) -> [NSDate: [QuakeFeed.Feature]]? {
-        if searching {
-            guard let filtered = filtered else { return nil }
-            return categorizeFeaturesByDate(filtered)
-        } else {
-            guard let features = feed?.features else { return nil }
-            return categorizeFeaturesByDate(features)
-        }
+    private func getAllFeaturesByDate(searching: Bool) -> [NSDate: [QuakeFeed.Feature]]? {
+        guard let features = feed?.features else { return nil }
+        return categorizeFeaturesByDate(features)
     }
     
     func filterFeaturesByDate(searchText: String, scope: String) {
@@ -99,13 +89,12 @@ class EarthQuakeViewModel: NSObject {
     
     func fetchQuakeData(feedSummaryTimeInterval: FeedSummaryTimeInterval, completion: ((success: Bool, error: NSError?) -> Void)) {
         requestMgr.fetchQuakeSummary(feedSummaryTimeInterval, completion: {
-            [unowned self] success, feed, error in
+            [weak self] success, feed, error in
             
             if success {
-                self.feed = feed
-                self.allFeaturesByDate = self.featuresByDate(false)
-                self.filteredFeatureByDate = self.featuresByDate(true)
-            } 
+                self?.feed = feed
+                self?.allFeaturesByDate = self?.getAllFeaturesByDate(false)
+            }
 
             completion(success: success, error: error)
         })

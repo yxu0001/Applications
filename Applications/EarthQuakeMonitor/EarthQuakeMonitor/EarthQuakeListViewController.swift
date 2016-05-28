@@ -121,6 +121,11 @@ class EarthQuakeListViewController: UIViewController {
                 }
                 
                 if success {
+                    if self.isSearching() {
+                        let searchBar = self.searchController.searchBar
+                        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+                        self.filterContentForSearchText(searchBar.text!, scope: scope)
+                    }
                     self.tableView.reloadData()
                 } else {
                     print(error?.description)
@@ -154,25 +159,6 @@ class EarthQuakeListViewController: UIViewController {
     
     // MARK: - UISearchController
     func filterContentForSearchText(searchText: String, scope: String = "All") {
-//        if isSearching() {
-//            if searchText.isEmpty {
-//                if scope == "All" {
-//                    quakeVM.filtered = quakeVM.feed?.features
-//                } else if scope == "M4.5 up" {
-//                    quakeVM.filtered = quakeVM.feed?.features.filter{ feature in return feature.properties.mag >= 4.5 }
-//                }
-//            } else {
-//                if scope == "All" {
-//                    quakeVM.filtered = quakeVM.feed?.features.filter { feature in
-//                        return feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
-//                    }
-//                } else if scope == "M4.5 up" {
-//                    quakeVM.filtered = quakeVM.feed?.features.filter { feature in
-//                        return (feature.properties.mag >= 4.5) && feature.properties.title.lowercaseString.containsString(searchText.lowercaseString)
-//                    }
-//                }
-//            }
-//        }
         if isSearching() {
             quakeVM.filterFeaturesByDate(searchText, scope: scope)
         }
@@ -327,7 +313,7 @@ extension EarthQuakeListViewController: UISearchBarDelegate, UISearchControllerD
     func updateSearchResultsForSearchController(searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
-        filterContentForSearchText(searchController.searchBar.text!, scope: scope)
+        filterContentForSearchText(searchBar.text!, scope: scope)
     }
 }
 
