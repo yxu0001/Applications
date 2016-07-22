@@ -1,0 +1,115 @@
+swagger: '2.0'
+definitions:
+  QuakeFeed:
+    type: "FeatureCollection"
+    properties:
+      metadata:
+        generated:
+          type: int64
+        url:
+          type: string
+        title:
+          type: string
+        api:
+          type: string
+        count:
+          type: int64
+        status:
+          type: int64
+      bbox:
+        description: "[minimum_longitude, minimum_latitude, minimum_depth, maximum_longitude, maximum_latitude, maximum_depth]"
+        type: array
+        items:
+          type: double
+      features:
+        type: array
+        items:
+          $ref: "#/definitions/Feature"
+
+  Feature:
+    type:
+      type: string
+    properties:
+      $ref: "#/definitions/Feature.properties"
+    geometry:
+      $ref: "#/definitions/Feature.geometry"
+    id:
+      type: string
+
+  Feature.properties:
+    type: object
+    properties:
+      mag:
+        type: double
+      place:
+        type: string
+      time:
+        type: int64
+      updated:
+        type: int64
+      tz:
+        type: int32
+      url:
+        type: string
+      detail:
+        type: string
+      felt:
+        type: int32
+      cdi:
+        type: double
+      mmi:
+        type: double
+      alert:
+        type: string
+      status:
+        type: string
+      tsumani:
+        type: int32
+      sig:
+        type: int32
+      net:
+        type: string
+      code:
+        type: string
+      ids:
+        type: string
+      sources:
+        type: string
+      types:
+        type: string
+      nst:
+        type: int32
+      dmin:
+        type: double
+      rms:
+        type: double
+      gap:
+        type: double
+      magType:
+        type: string
+      type:
+        type: string
+
+  Feature.geometry:
+    type:
+      type: string
+    coordinates:
+      description: "[longitude, latitude, depth]"
+      type: array
+      items:
+        type: double
+
+info:
+  version: "1.0.0"
+  title: "EarthQuake"
+
+paths:
+  /:
+    get:
+      responses:
+        200:
+          description: Success
+
+
+schemes:
+  - http

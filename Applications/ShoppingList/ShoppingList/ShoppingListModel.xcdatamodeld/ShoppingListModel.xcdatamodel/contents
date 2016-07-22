@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Xcode 7.0">
+    <entity name="Item" representedClassName=".Item" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="ShoppingList" representedClassName=".ShoppingList" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ShoppingListItem" syncable="YES"/>
+    </entity>
+    <entity name="ShoppingListItem" representedClassName=".ShoppingListItem" syncable="YES">
+        <attribute name="count" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="fulfilled" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="belongsTo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Store" syncable="YES"/>
+        <relationship name="isOf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Item" syncable="YES"/>
+    </entity>
+    <entity name="Store" representedClassName=".Store" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Item" positionX="-117" positionY="12" width="128" height="60"/>
+        <element name="ShoppingList" positionX="-531" positionY="-43" width="128" height="73"/>
+        <element name="ShoppingListItem" positionX="-369" positionY="63" width="128" height="103"/>
+        <element name="Store" positionX="-236" positionY="-96" width="128" height="60"/>
+    </elements>
+</model>

@@ -162,7 +162,9 @@ class EarthQuakeListViewController: UIViewController {
         if isSearching() {
             quakeVM.filterFeaturesByDate(searchText, scope: scope)
         }
+        print("filtered data begin reload")
         tableView.reloadData()
+        print("filtered data end reload")
     }
 }
 
