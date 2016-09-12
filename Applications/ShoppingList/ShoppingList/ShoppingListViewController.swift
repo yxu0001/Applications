@@ -65,7 +65,7 @@ class ShoppingListViewController: UIViewController {
             let results = try dataMgr?.mainContext?.executeFetchRequest(fetchRequest)
             
             shoppingLists = results as! [ShoppingList]
-            currentShoppingList = shoppingLists.isEmpty ? nil : shoppingLists[0]
+            //currentShoppingList = shoppingLists.isEmpty ? nil : shoppingLists[0]
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
@@ -85,15 +85,40 @@ class ShoppingListViewController: UIViewController {
 }
 
 extension ShoppingListViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        var numOfSections: Int = 0
+        if shoppingLists == nil || shoppingLists.count == 0 {
+            let noDataLabel: UILabel     = UILabel(frame: CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height))
+            noDataLabel.text             = "No Shopping List"
+            noDataLabel.textColor        = UIColor.blackColor()
+            noDataLabel.textAlignment    = .Center
+            tableView.backgroundView = noDataLabel
+            tableView.separatorStyle = .None
+        } else {
+            numOfSections = 1
+            tableView.backgroundView = nil
+            tableView.separatorStyle = .SingleLineEtched
+        }
+        
+        return numOfSections
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentShoppingList?.items?.count ?? 0
+        //return currentShoppingList?.items?.count ?? 0
+        return shoppingLists == nil ? 0 : shoppingLists.count
     }
     
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ItemCell", forIndexPath: indexPath)
-        let shoppintListItem = currentShoppingList?.items?.allObjects[indexPath.row] as? ShoppingListItem
-        cell.textLabel?.text = shoppintListItem?.isOf?.name
+        //let shoppintListItem = currentShoppingList?.items?.allObjects[indexPath.row] as? ShoppingListItem
+        //cell.textLabel?.text = shoppintListItem?.isOf?.name
+        let aShoppingList = shoppingLists[indexPath.row] as ShoppingList
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "MM-dd-yyyy"
+        if let date = aShoppingList.date {
+            cell.textLabel?.text = dateFormatter.stringFromDate(date)
+        }
         return cell
     }
 
