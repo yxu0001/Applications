@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet weak var titleLabel: UILabel!
+    
     @IBOutlet weak var numberLabel: UILabel!
     
     @IBOutlet weak var resultLabel: UILabel!
@@ -20,13 +22,22 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var keypadToBottomConstraint: NSLayoutConstraint!
     
+    let titleString = "数字吉凶测试"
+    let placeholderNumberString = "Plase input number"
+    let placeholderResultString = "吉或凶"
+    let placeholderWordString = "词曰："
+    
     var numberString: String! = ""
     var engine: NumberWisdomEngine!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        numberLabel.text = ""
+        titleLabel.text = titleString
+        numberLabel.text = placeholderNumberString
+        wordLabel.text = placeholderWordString
+        resultLabel.text = placeholderResultString
+
         engine = NumberWisdomEngine()
     }
 
@@ -45,42 +56,67 @@ class ViewController: UIViewController {
         } else if (buttonInput == "Enter") {
             if let number = Int(numberString),
                 (word, result) = engine.findLuck(number) {
-                
-                print(self.keypadView.frame.origin)
-                let height = self.keypadView.frame.size.height
-                keypadToBottomConstraint.constant = -height
-                
                 wordLabel.text = word
                 resultLabel.text = result
-                
-                UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
-                    self.view.layoutIfNeeded()
-                    }, completion: { finished in
-                })
+
+                /*
+                if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
+                    print(self.keypadView.frame.origin)
+                    let height = self.keypadView.frame.size.height
+                    keypadToBottomConstraint.constant = -height
+                    
+                    UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
+                        self.view.layoutIfNeeded()
+                        }, completion: { finished in
+                    })
+                }*/
             }
-        } else {
+        } else if (buttonInput == "<") {
+            if numberString.characters.count > 1 {
+                let prevIndex = numberString.endIndex.predecessor()
+                numberString = numberString.substringToIndex(prevIndex)
+                numberLabel.text = numberString
+                if let number = Int(numberString),
+                    (word, result) = engine.findLuck(number) {
+                    wordLabel.text = word
+                    resultLabel.text = result
+                }
+            } else {
+                reset()
+            }
+        }
+        else {
             numberString = numberString + buttonInput
             numberLabel.text = numberString
+            
+            if let number = Int(numberString),
+                (word, result) = engine.findLuck(number) {
+                wordLabel.text = word
+                resultLabel.text = result
+            }
         }
     }
     
     
     private func reset() {
         numberString = ""
-        numberLabel.text = ""
-        wordLabel.text = ""
-        resultLabel.text = ""
+        numberLabel.text = placeholderNumberString
+        wordLabel.text = placeholderWordString
+        resultLabel.text = placeholderResultString
     }
     
     @IBAction func numberLabelTapped(sender: AnyObject) {
         reset()
         
         print("numberLabelTapped")
-        keypadToBottomConstraint.constant = 0.0
         
-        UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
-            self.view.layoutIfNeeded()
-            }, completion: { finished in })
+        /*
+        if(UIDeviceOrientationIsPortrait(UIDevice.currentDevice().orientation)) {
+            keypadToBottomConstraint.constant = 0.0
+            UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+                }, completion: { finished in })
+        }*/
     }
 }
 
