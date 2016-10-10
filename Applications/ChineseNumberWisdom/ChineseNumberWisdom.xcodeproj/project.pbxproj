@@ -14,6 +14,10 @@
 		AA01DBE21DA54EE10060117B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA01DBE01DA54EE10060117B /* LaunchScreen.storyboard */; };
 		AA01DBED1DA54EE10060117B /* ChineseNumberWisdomTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01DBEC1DA54EE10060117B /* ChineseNumberWisdomTests.swift */; };
 		AA01DBF81DA54EE20060117B /* ChineseNumberWisdomUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01DBF71DA54EE20060117B /* ChineseNumberWisdomUITests.swift */; };
+		AA01DC061DA55A690060117B /* NumberWisdomEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01DC051DA55A690060117B /* NumberWisdomEngine.swift */; };
+		AA01DC071DA55A690060117B /* NumberWisdomEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA01DC051DA55A690060117B /* NumberWisdomEngine.swift */; };
+		AA01DC091DA55D7B0060117B /* ChineseNumberWisdom.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA01DC081DA55D7B0060117B /* ChineseNumberWisdom.plist */; };
+		AA01DC0A1DA55D7B0060117B /* ChineseNumberWisdom.plist in Resources */ = {isa = PBXBuildFile; fileRef = AA01DC081DA55D7B0060117B /* ChineseNumberWisdom.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +51,8 @@
 		AA01DBF31DA54EE20060117B /* ChineseNumberWisdomUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChineseNumberWisdomUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA01DBF71DA54EE20060117B /* ChineseNumberWisdomUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChineseNumberWisdomUITests.swift; sourceTree = "<group>"; };
 		AA01DBF91DA54EE20060117B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA01DC051DA55A690060117B /* NumberWisdomEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberWisdomEngine.swift; sourceTree = "<group>"; };
+		AA01DC081DA55D7B0060117B /* ChineseNumberWisdom.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ChineseNumberWisdom.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,8 @@
 				AA01DBDE1DA54EE10060117B /* Assets.xcassets */,
 				AA01DBE01DA54EE10060117B /* LaunchScreen.storyboard */,
 				AA01DBE31DA54EE10060117B /* Info.plist */,
+				AA01DC051DA55A690060117B /* NumberWisdomEngine.swift */,
+				AA01DC081DA55D7B0060117B /* ChineseNumberWisdom.plist */,
 			);
 			path = ChineseNumberWisdom;
 			sourceTree = "<group>";
@@ -231,6 +239,7 @@
 			files = (
 				AA01DBE21DA54EE10060117B /* LaunchScreen.storyboard in Resources */,
 				AA01DBDF1DA54EE10060117B /* Assets.xcassets in Resources */,
+				AA01DC091DA55D7B0060117B /* ChineseNumberWisdom.plist in Resources */,
 				AA01DBDD1DA54EE10060117B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,6 +248,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA01DC0A1DA55D7B0060117B /* ChineseNumberWisdom.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,6 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA01DBDA1DA54EE10060117B /* ViewController.swift in Sources */,
+				AA01DC061DA55A690060117B /* NumberWisdomEngine.swift in Sources */,
 				AA01DBD81DA54EE10060117B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -266,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA01DBED1DA54EE10060117B /* ChineseNumberWisdomTests.swift in Sources */,
+				AA01DC071DA55A690060117B /* NumberWisdomEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
