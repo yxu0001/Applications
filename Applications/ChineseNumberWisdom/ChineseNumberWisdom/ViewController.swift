@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         
         let buttonInput = (sender as! UIButton).titleLabel!.text!
         
-        if (buttonInput == "Clear") {
+        if (buttonInput == "C") {
             reset()
         } else if (buttonInput == "Enter") {
             if let number = Int(numberString),

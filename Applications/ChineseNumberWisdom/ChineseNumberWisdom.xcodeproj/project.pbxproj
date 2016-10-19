@@ -494,6 +494,7 @@
 				AA01DBFE1DA54EE20060117B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA01DBFF1DA54EE20060117B /* Build configuration list for PBXNativeTarget "ChineseNumberWisdomTests" */ = {
 			isa = XCConfigurationList;
@@ -502,6 +503,7 @@
 				AA01DC011DA54EE20060117B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA01DC021DA54EE20060117B /* Build configuration list for PBXNativeTarget "ChineseNumberWisdomUITests" */ = {
 			isa = XCConfigurationList;
@@ -510,6 +512,7 @@
 				AA01DC041DA54EE20060117B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
