@@ -22,10 +22,13 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var keypadToBottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var numberTextField: UITextField!
+
     let titleString = "数字吉凶测试"
-    let placeholderNumberString = "Plase input number"
+    let placeholderNumberString = " "
     let placeholderResultString = "吉或凶"
     let placeholderWordString = "词曰："
+    let placeholderTestField = "请输入数字"
     
     var numberString: String! = ""
     var engine: NumberWisdomEngine!
@@ -35,6 +38,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         titleLabel.text = titleString
         numberLabel.text = placeholderNumberString
+        numberTextField.placeholder = placeholderTestField
         wordLabel.text = placeholderWordString
         resultLabel.text = placeholderResultString
 
@@ -75,7 +79,8 @@ class ViewController: UIViewController {
             if numberString.characters.count > 1 {
                 let prevIndex = numberString.endIndex.predecessor()
                 numberString = numberString.substringToIndex(prevIndex)
-                numberLabel.text = numberString
+                //numberLabel.text = numberString
+                numberTextField.text = numberString
                 if let number = Int(numberString),
                     (word, result) = engine.findLuck(number) {
                     wordLabel.text = word
@@ -87,7 +92,8 @@ class ViewController: UIViewController {
         }
         else {
             numberString = numberString + buttonInput
-            numberLabel.text = numberString
+            //numberLabel.text = numberString
+            numberTextField.text = numberString
             
             if let number = Int(numberString),
                 (word, result) = engine.findLuck(number) {
@@ -103,6 +109,7 @@ class ViewController: UIViewController {
         numberLabel.text = placeholderNumberString
         wordLabel.text = placeholderWordString
         resultLabel.text = placeholderResultString
+        numberTextField.text = nil
     }
     
     @IBAction func numberLabelTapped(sender: AnyObject) {
