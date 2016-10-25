@@ -14,18 +14,18 @@ class NumberWisdomEngine {
     var numberWisdomArray: NSArray?
     
     init() {
-        if let path = NSBundle.mainBundle().pathForResource("ChineseNumberWisdom", ofType: "plist") {
+        if let path = Bundle.main.path(forResource: "ChineseNumberWisdom", ofType: "plist") {
             numberWisdomArray = NSArray(contentsOfFile: path)
         }
     }
     
-    private func remainder(number: Int) -> Int {
+    fileprivate func remainder(_ number: Int) -> Int {
         
         return number % divider
     }
     
     
-    func findLuck(number: Int) -> (String, String)? {
+    func findLuck(_ number: Int) -> (String, String)? {
         
         var index = remainder(number) - 1
         
@@ -34,7 +34,7 @@ class NumberWisdomEngine {
         }
         
         if let numberWisdomArray = numberWisdomArray {
-            let dict = numberWisdomArray[index]
+            let dict = numberWisdomArray[index] as! NSDictionary
             
             return (dict["word"] as! String, dict["result"] as! String)
         }

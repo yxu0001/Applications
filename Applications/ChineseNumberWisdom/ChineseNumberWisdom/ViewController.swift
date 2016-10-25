@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func buttonTapped(sender: AnyObject) {
+    @IBAction func buttonTapped(_ sender: AnyObject) {
         print((sender as! UIButton).titleLabel!.text!)
         
         let buttonInput = (sender as! UIButton).titleLabel!.text!
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
             reset()
         } else if (buttonInput == "Enter") {
             if let number = Int(numberString),
-                (word, result) = engine.findLuck(number) {
+                let (word, result) = engine.findLuck(number) {
                 wordLabel.text = word
                 resultLabel.text = result
 
@@ -77,12 +77,12 @@ class ViewController: UIViewController {
             }
         } else if (buttonInput == "<") {
             if numberString.characters.count > 1 {
-                let prevIndex = numberString.endIndex.predecessor()
-                numberString = numberString.substringToIndex(prevIndex)
+                let prevIndex = numberString.index(before: numberString.endIndex)
+                numberString = numberString.substring(to: prevIndex)
                 //numberLabel.text = numberString
                 numberTextField.text = numberString
                 if let number = Int(numberString),
-                    (word, result) = engine.findLuck(number) {
+                    let (word, result) = engine.findLuck(number) {
                     wordLabel.text = word
                     resultLabel.text = result
                 }
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
             numberTextField.text = numberString
             
             if let number = Int(numberString),
-                (word, result) = engine.findLuck(number) {
+                let (word, result) = engine.findLuck(number) {
                 wordLabel.text = word
                 resultLabel.text = result
             }
@@ -104,7 +104,7 @@ class ViewController: UIViewController {
     }
     
     
-    private func reset() {
+    fileprivate func reset() {
         numberString = ""
         numberLabel.text = placeholderNumberString
         wordLabel.text = placeholderWordString
@@ -112,7 +112,7 @@ class ViewController: UIViewController {
         numberTextField.text = nil
     }
     
-    @IBAction func numberLabelTapped(sender: AnyObject) {
+    @IBAction func numberLabelTapped(_ sender: AnyObject) {
         reset()
         
         print("numberLabelTapped")
