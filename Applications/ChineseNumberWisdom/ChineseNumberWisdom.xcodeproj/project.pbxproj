@@ -201,9 +201,9 @@
 				TargetAttributes = {
 					AA01DBD31DA54EE10060117B = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = L25P52WSA5;
+						DevelopmentTeam = 66UJ9L49C4;
 						LastSwiftMigration = 0800;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					AA01DBE71DA54EE10060117B = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -421,14 +421,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				DEVELOPMENT_TEAM = L25P52WSA5;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 66UJ9L49C4;
 				INFOPLIST_FILE = ChineseNumberWisdom/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.ChineseNumberWisdom;
+				PRODUCT_BUNDLE_IDENTIFIER = ChineseNumberWisdom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4402a9c5-589a-49f5-9224-5c6645cf80aa";
-				PROVISIONING_PROFILE_SPECIFIER = EpocratesPrimary;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -437,10 +437,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 66UJ9L49C4;
 				INFOPLIST_FILE = ChineseNumberWisdom/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.ChineseNumberWisdom;
+				PRODUCT_BUNDLE_IDENTIFIER = ChineseNumberWisdom;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
