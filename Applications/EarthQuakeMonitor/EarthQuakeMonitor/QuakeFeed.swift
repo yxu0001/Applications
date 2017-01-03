@@ -89,7 +89,7 @@ struct QuakeFeed {
     var bbox: [Double]!
     
     struct Metadata {
-        var generated: NSTimeInterval!
+        var generated: TimeInterval!
         var url: String!
         var title: String!
         var status: Int!
@@ -106,8 +106,8 @@ struct QuakeFeed {
         struct Property {
             var mag: Double!
             var place: String!
-            var time: NSTimeInterval!
-            var updated: NSTimeInterval!
+            var time: TimeInterval!
+            var updated: TimeInterval!
             var tz: Int!
             var url: String?
             var detail: String?

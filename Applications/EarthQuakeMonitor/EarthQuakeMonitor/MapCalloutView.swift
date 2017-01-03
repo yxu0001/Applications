@@ -14,16 +14,16 @@ class MapCalloutView: UIView {
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         // Drawing code
-        UIColor.darkGrayColor().setFill()
+        UIColor.darkGray.setFill()
         
         // draw the pointed shape
         let pointShape = UIBezierPath()
         let middleX = self.frame.size.width/2.0
-        pointShape.moveToPoint(CGPoint(x: middleX - 10.0, y: self.frame.height - 10.0))
-        pointShape.addLineToPoint(CGPoint(x: middleX, y: self.frame.height))
-        pointShape.addLineToPoint(CGPoint(x: middleX + 10.0, y: self.frame.height - 10.0))
+        pointShape.move(to: CGPoint(x: middleX - 10.0, y: self.frame.height - 10.0))
+        pointShape.addLine(to: CGPoint(x: middleX, y: self.frame.height))
+        pointShape.addLine(to: CGPoint(x: middleX + 10.0, y: self.frame.height - 10.0))
         pointShape.fill()
                 
         // draw the rounded box

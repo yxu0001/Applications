@@ -33,7 +33,7 @@ class EarthQuakeListViewController: UIViewController {
         // Pull to refresh
         let refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(EarthQuakeListViewController.refresh(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        refreshControl.addTarget(self, action: #selector(EarthQuakeListViewController.refresh(_:)), for: UIControlEvents.valueChanged)
         self.refreshControl = refreshControl
         tableView.addSubview(refreshControl)
         
@@ -56,20 +56,20 @@ class EarthQuakeListViewController: UIViewController {
         tableView.estimatedRowHeight = 60.0
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         updateSearchBarFrame()
     }
     
     // This method is necessary for rotation. Setting constraints does not seem to work.
-    private func updateSearchBarFrame() {
+    fileprivate func updateSearchBarFrame() {
         var frame = searchController.searchBar.frame
         frame.size.width = searchBarContainerView.frame.size.width
         searchController.searchBar.frame = frame
     }
     
-    override func didRotateFromInterfaceOrientation(fromInterfaceOrientation: UIInterfaceOrientation) {
+    override func didRotate(from fromInterfaceOrientation: UIInterfaceOrientation) {
         updateSearchBarFrame()
     }
     
@@ -79,7 +79,7 @@ class EarthQuakeListViewController: UIViewController {
     }
     
     deinit {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             self.refreshControl!.endRefreshing()
         })
     }
@@ -87,12 +87,12 @@ class EarthQuakeListViewController: UIViewController {
     // MARK: - Navigation
     
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     // Get the new view controller using segue.destinationViewController.
     // Pass the selected object to the new view controller.
         if segue.identifier == "MapViewSegue" {
             
-            let destinationVC = (segue.destinationViewController as! UINavigationController).topViewController as! MapViewController
+            let destinationVC = (segue.destination as! UINavigationController).topViewController as! MapViewController
 
             destinationVC.selectedFeature = selectedFeature
             if let features = quakeVM.feed?.features {
@@ -100,17 +100,17 @@ class EarthQuakeListViewController: UIViewController {
                 destinationVC.feeds = Array(features[0..<length])
             }
             
-            destinationVC.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem()
+            destinationVC.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
             destinationVC.navigationItem.leftItemsSupplementBackButton = true
         }
     }
 
     
     // MARK: - Pull to refresh
-    func refresh(sender: AnyObject) {
+    func refresh(_ sender: AnyObject) {
         quakeVM.fetchQuakeData(currentRefreshTimeInterval, completion: {
             [unowned self] success, error in
-            dispatch_async(dispatch_get_main_queue()) {
+            DispatchQueue.main.async {
                 self.refreshControl!.endRefreshing()
                 self.navigationItem.title = self.navbarTitle()
                 
@@ -134,7 +134,7 @@ class EarthQuakeListViewController: UIViewController {
         })
     }
     
-    private func navbarTitle() -> String {
+    fileprivate func navbarTitle() -> String {
         var title = "Earthquakes in the Past "
         switch currentRefreshTimeInterval {
         case .AllDay:
@@ -151,14 +151,14 @@ class EarthQuakeListViewController: UIViewController {
         return title
     }
     
-    private func isSearching() -> Bool {
+    fileprivate func isSearching() -> Bool {
         //return searchController.active && !searchController.searchBar.text!.isEmpty
-        quakeVM.isSearching = searchController.active
-        return searchController.active
+        quakeVM.isSearching = searchController.isActive
+        return searchController.isActive
     }
     
     // MARK: - UISearchController
-    func filterContentForSearchText(searchText: String, scope: String = "All") {
+    func filterContentForSearchText(_ searchText: String, scope: String = "All") {
         if isSearching() {
             quakeVM.filterFeaturesByDate(searchText, scope: scope)
         }
@@ -169,20 +169,20 @@ class EarthQuakeListViewController: UIViewController {
 }
 
 extension EarthQuakeListViewController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return quakeVM.numberOfSections()
     }
     
     // MARK: - UITableViewDataSource and UITableViewDelegate
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return quakeVM.numberOfRowsInSetion(section)
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("FeedCell", forIndexPath: indexPath) as! FeedCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath) as! FeedCell
         
         guard let featuresByDate = quakeVM.getFeaturesByDate() else { return cell }
-        let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
+        let orderedKeys = featuresByDate.keys.sorted { $0.compare($1 as Date) == .orderedDescending }
         let key = orderedKeys[indexPath.section]
         guard let features = featuresByDate[key] else { return cell }
         let feature = features[indexPath.row]
@@ -195,17 +195,17 @@ extension EarthQuakeListViewController: UITableViewDataSource, UITableViewDelega
         cell.title.textColor = textColor
         let timestamp = feature.properties.time // milliseconds
         
-        let datetime = NSDate(timeIntervalSince1970: timestamp! * 0.001)
-        let dateformatter = NSDateFormatter()
+        let datetime = Date(timeIntervalSince1970: timestamp! * 0.001)
+        let dateformatter = DateFormatter()
         dateformatter.dateFormat = "yyyy-MM-dd HH:mm:ss ZZZ "
-        dateformatter.timeZone = NSTimeZone(name: "UTC")
+        dateformatter.timeZone = TimeZone(identifier: "UTC")
         // set timezone
         //let tz = feed?.features[indexPath.row].properties.tz // timezone
         //let timezone = NSTimeZone(forSecondsFromGMT: tz!*60)
         //dateformatter.timeZone = timezone
-        let datestring = dateformatter.stringFromDate(datetime)
+        let datestring = dateformatter.string(from: datetime)
         //cell.detailTextLabel?.text = datestring + dateformatter.timeZone.name
-        cell.subTitle.text = datestring + dateformatter.timeZone.name
+        cell.subTitle.text = datestring + dateformatter.timeZone.identifier
         cell.subTitle.textColor = textColor
         
         // Hightlight search string
@@ -213,11 +213,11 @@ extension EarthQuakeListViewController: UITableViewDataSource, UITableViewDelega
             let baseString = cell.title.text!
             let attributed = NSMutableAttributedString(string: baseString)
             
-            let regex = try? NSRegularExpression(pattern: searchController.searchBar.text!, options: .CaseInsensitive)
+            let regex = try? NSRegularExpression(pattern: searchController.searchBar.text!, options: .caseInsensitive)
             
-            if let matches = (regex?.matchesInString(baseString, options: .ReportProgress, range: NSRange(location: 0, length: baseString.utf16.count)) as [NSTextCheckingResult]?) {
+            if let matches = (regex?.matches(in: baseString, options: .reportProgress, range: NSRange(location: 0, length: baseString.utf16.count)) as [NSTextCheckingResult]?) {
                 for match in matches {
-                    attributed.addAttribute(NSBackgroundColorAttributeName, value: UIColor.yellowColor(), range: match.range)
+                    attributed.addAttribute(NSBackgroundColorAttributeName, value: UIColor.yellow, range: match.range)
                 }
                 
                 cell.title.attributedText = attributed
@@ -228,23 +228,23 @@ extension EarthQuakeListViewController: UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         guard let featuresByDate = quakeVM.getFeaturesByDate() else { return nil }
-        let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
+        let orderedKeys = featuresByDate.keys.sorted { $0.compare($1 as Date) == .orderedDescending }
         let key = orderedKeys[section]
-        let dateFormatter = NSDateFormatter()
+        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MMM-dd-yyyy"
-        dateFormatter.timeZone = NSTimeZone(name: "UTC")
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
         
-        return dateFormatter.stringFromDate(key)
+        return dateFormatter.string(from: key as Date)
     }
     
-    private func colorCodedAlertLevel(alert: AlertLevel?) -> UIColor {
+    fileprivate func colorCodedAlertLevel(_ alert: AlertLevel?) -> UIColor {
         let color: UIColor
         let green = UIColor(red: 82.0/255.0, green: 127.0/255.0, blue: 19.0/255.0, alpha: 1.0)
-        let yellow = UIColor.yellowColor()
-        let orange = UIColor.orangeColor()
-        let red = UIColor.redColor()
+        let yellow = UIColor.yellow
+        let orange = UIColor.orange
+        let red = UIColor.red
         
         if let alert = alert {
             switch(alert) {
@@ -264,55 +264,55 @@ extension EarthQuakeListViewController: UITableViewDataSource, UITableViewDelega
         return color
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         if let featuresByDate = quakeVM.getFeaturesByDate() {
-            let orderedKeys = featuresByDate.keys.sort { $0.compare($1) == .OrderedDescending }
+            let orderedKeys = featuresByDate.keys.sorted { $0.compare($1 as Date) == .orderedDescending }
             let key = orderedKeys[indexPath.section]
             if let features = featuresByDate[key] {
                 selectedFeature = features[indexPath.row]
             }
         }
-        performSegueWithIdentifier("MapViewSegue", sender: self)
+        performSegue(withIdentifier: "MapViewSegue", sender: self)
     }
 }
 
 extension EarthQuakeListViewController: UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
     // MARK: - UISearchBarDelegate
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
     
     // MARK: - UISearchControllerDelegate
-    func presentSearchController(searchController: UISearchController) {
+    func presentSearchController(_ searchController: UISearchController) {
         debugPrint("UISearchControllerDelegate invoked method: \(#function).")
     }
     
-    func willPresentSearchController(searchController: UISearchController) {
+    func willPresentSearchController(_ searchController: UISearchController) {
         debugPrint("UISearchControllerDelegate invoked method: \(#function).")
     }
     
-    func didPresentSearchController(searchController: UISearchController) {
+    func didPresentSearchController(_ searchController: UISearchController) {
         debugPrint("UISearchControllerDelegate invoked method: \(#function).")
     }
     
-    func willDismissSearchController(searchController: UISearchController) {
+    func willDismissSearchController(_ searchController: UISearchController) {
         debugPrint("UISearchControllerDelegate invoked method: \(#function).")
     }
     
-    func didDismissSearchController(searchController: UISearchController) {
+    func didDismissSearchController(_ searchController: UISearchController) {
         debugPrint("UISearchControllerDelegate invoked method: \(#function).")
         updateSearchBarFrame()
     }
     
     // MARK: - UISearchBar Delegate
-    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         filterContentForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
     }
     
     // MARK: - UISearchResultsUpdating
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
         filterContentForSearchText(searchBar.text!, scope: scope)

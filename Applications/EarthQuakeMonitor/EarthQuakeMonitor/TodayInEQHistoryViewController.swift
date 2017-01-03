@@ -11,7 +11,7 @@ class TodayInEQHistoryViewController: WebViewController {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        request = NSURLRequest(URL: NSURL(string: "http://earthquake.usgs.gov/learn/today/")!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 3600)
+        request = URLRequest(url: URL(string: "http://earthquake.usgs.gov/learn/today/")!, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 3600)
         //request = NSURLRequest(URL: NSURL(string: "http://sfgate.com")!, cachePolicy: .ReloadIgnoringLocalCacheData, timeoutInterval: 3600)
     }
     

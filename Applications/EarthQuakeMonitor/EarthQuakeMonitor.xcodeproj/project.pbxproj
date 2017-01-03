@@ -221,12 +221,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA5FD3B41CA092E100C9DD64 /* Build configuration list for PBXNativeTarget "EarthQuakeMonitor" */;
 			buildPhases = (
-				0A42722DA3753B71A1ECE480 /* Check Pods Manifest.lock */,
+				0A42722DA3753B71A1ECE480 /* [CP] Check Pods Manifest.lock */,
 				AA5FD3861CA092E100C9DD64 /* Sources */,
 				AA5FD3871CA092E100C9DD64 /* Frameworks */,
 				AA5FD3881CA092E100C9DD64 /* Resources */,
-				AEF40EC99C69F4886A301352 /* Embed Pods Frameworks */,
-				EF343750EF2CCFEBC4B69DA4 /* Copy Pods Resources */,
+				AEF40EC99C69F4886A301352 /* [CP] Embed Pods Frameworks */,
+				EF343750EF2CCFEBC4B69DA4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -285,13 +285,17 @@
 				TargetAttributes = {
 					AA5FD3891CA092E100C9DD64 = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = 66UJ9L49C4;
+						LastSwiftMigration = 0810;
 					};
 					AA5FD39F1CA092E100C9DD64 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = AA5FD3891CA092E100C9DD64;
 					};
 					AA5FD3AA1CA092E100C9DD64 = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0810;
 						TestTargetID = AA5FD3891CA092E100C9DD64;
 					};
 				};
@@ -346,29 +350,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0A42722DA3753B71A1ECE480 /* Check Pods Manifest.lock */ = {
+		0A42722DA3753B71A1ECE480 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		AEF40EC99C69F4886A301352 /* Embed Pods Frameworks */ = {
+		AEF40EC99C69F4886A301352 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -376,14 +380,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EarthQuakeMonitor/Pods-EarthQuakeMonitor-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EF343750EF2CCFEBC4B69DA4 /* Copy Pods Resources */ = {
+		EF343750EF2CCFEBC4B69DA4 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -560,10 +564,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 66UJ9L49C4;
 				INFOPLIST_FILE = EarthQuakeMonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.EarthQuakeMonitor;
+				PRODUCT_BUNDLE_IDENTIFIER = EarthQuakeMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -574,10 +580,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 66UJ9L49C4;
 				INFOPLIST_FILE = EarthQuakeMonitor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.EarthQuakeMonitor;
+				PRODUCT_BUNDLE_IDENTIFIER = EarthQuakeMonitor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -590,6 +598,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.EarthQuakeMonitorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EarthQuakeMonitor.app/EarthQuakeMonitor";
 			};
 			name = Debug;
@@ -602,6 +611,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.EarthQuakeMonitorTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EarthQuakeMonitor.app/EarthQuakeMonitor";
 			};
 			name = Release;
@@ -613,6 +623,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.EarthQuakeMonitorUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = EarthQuakeMonitor;
 				USES_XCTRUNNER = YES;
 			};
@@ -625,6 +636,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Epocrates.EarthQuakeMonitorUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = EarthQuakeMonitor;
 				USES_XCTRUNNER = YES;
 			};

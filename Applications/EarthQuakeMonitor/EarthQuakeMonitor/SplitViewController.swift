@@ -12,7 +12,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.delegate = self
-        self.preferredDisplayMode = .Automatic
+        self.preferredDisplayMode = .automatic
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,7 +32,7 @@ class SplitViewController: UISplitViewController, UISplitViewControllerDelegate 
     */
     
     // MAKR: - UISplitViewControllerDelegate
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController, ontoPrimaryViewController primaryViewController: UIViewController) -> Bool {
+    func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         return true
     }
 

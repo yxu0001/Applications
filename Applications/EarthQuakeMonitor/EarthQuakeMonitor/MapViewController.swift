@@ -21,7 +21,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Do any additional setup after loading the view.
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if selectedFeature != nil {
@@ -33,7 +33,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             addAnnotation(quakeLoc)
         }
         
-        if let feeds = feeds where feeds.count > 0 {
+        if let feeds = feeds, feeds.count > 0 {
             for feed in feeds {
                 let quakeLoc = CLLocation(latitude: feed.geometry.coordinates[1], longitude: feed.geometry.coordinates[0])
 //                updateMapView(quakeLoc)
@@ -51,7 +51,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    private func updateMapView(location: CLLocation) {
+    fileprivate func updateMapView(_ location: CLLocation) {
         var region = MKCoordinateRegion()
         region.center.latitude = location.coordinate.latitude
         region.center.longitude = location.coordinate.longitude
@@ -61,13 +61,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.setRegion(region, animated: true)
     }
     
-    private func addCircle(center: CLLocation, radius: Double) {
+    fileprivate func addCircle(_ center: CLLocation, radius: Double) {
 //        mapView.removeOverlays(mapView.overlays)
-        let circle = MKCircle(centerCoordinate: center.coordinate, radius: radius)
-        mapView.addOverlay(circle)
+        let circle = MKCircle(center: center.coordinate, radius: radius)
+        mapView.add(circle)
     }
     
-    private func addAnnotation(center: CLLocation) {
+    fileprivate func addAnnotation(_ center: CLLocation) {
 //        let annotation = MKPointAnnotation()
 //        annotation.title = "\(selectedFeature.properties.title)"
 //        annotation.title = "latitude = \(selectedFeature.geometry.coordinates[1])," +
@@ -93,17 +93,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     */
     
     // MARK: - MKMapViewDelegate
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if (annotation is MKUserLocation) {
             return nil
         }
         
         //if (annotation.isKindOfClass(MKPointAnnotation)) {
-        if (annotation.isKindOfClass(CustomizedAnnotation)) {
+        if (annotation.isKind(of: CustomizedAnnotation.self)) {
             mapView.translatesAutoresizingMaskIntoConstraints = false
             //var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("CustomAnnotation") as MKAnnotationView!
             //var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("CustomAnnotation") as? MKPinAnnotationView
-            var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier("CustomAnnotation") as?CustomizedAnnotationView
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "CustomAnnotation") as?CustomizedAnnotationView
 
             
             if (annotationView == nil) {
@@ -132,11 +132,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
-        if overlay.isKindOfClass(MKCircle) {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay.isKind(of: MKCircle.self) {
             let circleRender = MKCircleRenderer(overlay: overlay)
-            circleRender.strokeColor = UIColor.redColor()
-            circleRender.fillColor = UIColor.yellowColor()
+            circleRender.strokeColor = UIColor.red
+            circleRender.fillColor = UIColor.yellow
             circleRender.lineWidth = 1
             circleRender.alpha = 0.5
             return circleRender

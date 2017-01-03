@@ -16,7 +16,7 @@ class CustomizedAnnotationView: MKAnnotationView {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
         
         if let annotation = annotation as? CustomizedAnnotation,
-            calloutView = NSBundle.mainBundle().loadNibNamed("MapCalloutView", owner: self, options: nil).first as? MapCalloutView {
+            let calloutView = Bundle.main.loadNibNamed("MapCalloutView", owner: self, options: nil)?.first as? MapCalloutView {
             let text = annotation.textForLabel ?? ""
             calloutView.label.text = text
             var calloutViewFrame = calloutView.frame
@@ -27,16 +27,17 @@ class CustomizedAnnotationView: MKAnnotationView {
             
             setNeedsLayout()
         }
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         self.alpha = 0.6
     }
-    
-    override init(frame: CGRect) {
+
+    /*
+    init(frame: CGRect) {
         super.init(frame: frame)
         //self.frame.size = CGSize(width: 100, height: 100)
-        self.frame.size = CGSizeZero
+        self.frame.size = CGSize.zero
         self.translatesAutoresizingMaskIntoConstraints = false
-    }
+    }*/
     
     required init?(coder aDecoder: NSCoder) {
         super.init(annotation: nil, reuseIdentifier: nil)

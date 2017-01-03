@@ -11,7 +11,9 @@ import SwiftyJSON
 class AFRequestManager: NSObject {
     
     lazy var config = Config()
-    let queue = dispatch_queue_create("com.earthquakemonitor.queue", DISPATCH_QUEUE_CONCURRENT)
+    //let queue = dispatch_queue_create("com.earthquakemonitor.queue", DISPATCH_QUEUE_CONCURRENT)
+    let queue = DispatchQueue(label: "com.earthquakemonitor.queue", attributes: .concurrent)
+
     
 //    private func composeURL(path: String, resource: String) -> NSURL? {
 //        let urlString = config.scheme + "://" + config.host + "/" + config.endpoint + "/" + path + "/" + resource
@@ -19,34 +21,35 @@ class AFRequestManager: NSObject {
 //        return NSURL(string: urlString)
 //    }
     
-    private func urlString(path: String, resource: String) -> String {
+    fileprivate func urlString(_ path: String, resource: String) -> String {
         return config.scheme + "://" + config.host + "/" + config.endpoint + "/" + path + "/" + resource
     }
 
-    func fetchQuakeSummary(feedSummaryTimeInterval: FeedSummaryTimeInterval, completion: ((success: Bool, feed: QuakeFeed?, error: NSError?) -> Void)?) {
-        Alamofire.request(.GET, urlString("summary", resource: feedSummaryTimeInterval.rawValue), parameters: nil, encoding: .URL, headers: nil)
-            .responseJSON(queue: queue, options: .AllowFragments, completionHandler: {
+    func fetchQuakeSummary(_ feedSummaryTimeInterval: FeedSummaryTimeInterval, completion: ((_ success: Bool, _ feed: QuakeFeed?, _ error: NSError?) -> Void)?) {
+        Alamofire.request(urlString("summary", resource: feedSummaryTimeInterval.rawValue))
+        //Alamofire.request(.GET, urlString("summary", resource: feedSummaryTimeInterval.rawValue), parameters: nil, encoding: .URL, headers: nil)
+            .responseJSON(queue: queue, options: .allowFragments, completionHandler: {
                 response in
                 guard response.result.isSuccess else {
                     print("Error while fetching tags: \(response.result.error)")
                     guard let completion = completion else { return }
-                    completion(success: false, feed: nil, error: response.result.error!)
+                    completion(false, nil, response.result.error! as NSError?)
                     return
                 }
                 
                 guard let responseJSON = response.result.value as? [String: AnyObject] else {
                     print("Invalid tag information received from service")
                     guard let completion = completion else { return }
-                    completion(success: false, feed: nil, error: response.result.error!)
+                    completion(false, nil, response.result.error! as NSError?)
                     return
                 }
                 let feed = self.parseSummary(responseJSON)
                 guard let completion = completion else { return }
-                completion(success: true, feed: feed, error: nil)
+                completion(true, feed, nil)
         })
     }
 
-    private func parseSummary(summaryJSON: [String: AnyObject]) -> QuakeFeed? {
+    fileprivate func parseSummary(_ summaryJSON: [String: AnyObject]) -> QuakeFeed? {
         let keys = QuakeFeedKey()
         var feed = QuakeFeed()
         
@@ -55,7 +58,7 @@ class AFRequestManager: NSObject {
         feed.type = json[keys.type].stringValue
         let metadata = json[keys.metadata]
         var meta = QuakeFeed.Metadata()
-        meta.generated = NSTimeInterval(metadata[keys.metatdataKey.generated].int64Value)
+        meta.generated = TimeInterval(metadata[keys.metatdataKey.generated].int64Value)
         meta.url = metadata[keys.metatdataKey.url].stringValue
         meta.title = metadata[keys.metatdataKey.title].stringValue
         meta.status = metadata[keys.metatdataKey.status].intValue
@@ -89,8 +92,8 @@ class AFRequestManager: NSObject {
             let propertyJSON = f[keys.featureKey.properties]
             property.mag = propertyJSON[keys.featureKey.propertyKey.mag].doubleValue
             property.place = propertyJSON[keys.featureKey.propertyKey.place].stringValue
-            property.time = NSTimeInterval(integerLiteral: propertyJSON[keys.featureKey.propertyKey.time].int64Value)
-            property.updated = NSTimeInterval(integerLiteral: propertyJSON[keys.featureKey.propertyKey.updated].int64Value)
+            property.time = TimeInterval(integerLiteral: propertyJSON[keys.featureKey.propertyKey.time].int64Value)
+            property.updated = TimeInterval(integerLiteral: propertyJSON[keys.featureKey.propertyKey.updated].int64Value)
             property.tz = propertyJSON[keys.featureKey.propertyKey.tz].intValue
             property.url = propertyJSON[keys.featureKey.propertyKey.url].string
             property.detail = propertyJSON[keys.featureKey.propertyKey.detail].string
